@@ -1,0 +1,23 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+  font-family: Arial, sans-serif; /* Fuente del texto */
+  margin: 0; /* Eliminar márgenes predeterminados */
+  padding: 0; /* Eliminar relleno predeterminado */
+}
+
+/* Estilos para el contenido principal */
+.main-content {
+  padding: 20px; /* Espaciado alrededor del contenido principal */
+}
+
+/* Estilos para el pie de página */
+.footer {
+  background-color: #333; /* Color de fondo del pie de página */
+  color: white; /* Color del texto del pie de página */
+  text-align: center; /* Alinear el texto al centro */
+  padding: 10px 0; /* Espaciado en el pie de página */
+}
+
+
+
+

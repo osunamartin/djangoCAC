@@ -1,0 +1,23 @@
+{%extends "core/base.html"%}
+{%block section_title%} Listado de Productos {%endblock%}
+{%block content%}
+
+      {% if hay_stock %}
+          <p style="color: green;">Stock Disponible</p>
+        {% else %}
+          <p style="color: red;">No hay stock</p>
+      {% endif %}
+        
+        {%filter upper%}
+          <ul>
+            <li>
+              <p>ryzen 3 5000</p>
+              <p>geforce 1050ti</p>
+              <p>mouse logitech</p>
+        
+            </li>
+          </ul>
+        {%endfilter%}
+{%endblock%}
+
+
