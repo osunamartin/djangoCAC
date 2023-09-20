@@ -30,4 +30,13 @@ def producto_detalle(request, nombre_producto):
 def producto_hay_stock(request, hay_stock):
   return HttpResponse(f'¿Hay stock de este producto?: {hay_stock}') 
 
+def contacto(request):
+  context = {}
+  
+  return render(request, 'core/formContacto.html')
+
+def quienesSomos(request):
+
+  return render(request, 'core/quienesSomos.html')
+
 

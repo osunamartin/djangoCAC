@@ -1,0 +1,35 @@
+#nosotros {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid #333;
+}
+
+#nosotros h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+#nosotros p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+#nosotros ul {
+    list-style: disc;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    text-align: left;
+}
+
+#nosotros ul li {
+    margin-bottom: 10px;
+    display: block;
+}
+
