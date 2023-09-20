@@ -1,0 +1,68 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  display: inline;
+  margin-right: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* menú desplegable */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 200px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 10px;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+/* Estilo base para el footer */
+.footer {
+  background-color: #333; /* Cambia el color de fondo según tu diseño */
+  color: #fff; /* Cambia el color del texto según tu diseño */
+  position: fixed;
+  width: 100%;
+  padding: 10px 10px 0px 10px;
+  bottom: 0;
+  text-align: center;
+}
+

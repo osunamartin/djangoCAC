@@ -1,0 +1,50 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameShop</title>
+    <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+</head>
+<header>
+  <h1>Tienda Gamer</h1>
+  <h2>{%block section_title%} {%endblock%}</h2>
+</header>
+<body>
+    
+    <nav>
+      <div class="navbar"></div>
+        <a href="{% url 'index' %}">Inicio</a>
+        <a href="#">Nosotros</a>
+        <a href="#">Contacto</a>
+        
+        <div class="dropdown">
+          <a href="{% url 'producto_lista' %}">Productos</a>
+            <i class="fa fa-caret-down"></i>
+          
+          <div class="dropdown-content">
+            <a href="#">Categoria1</a>
+            <a href="#">Categoria2</a>
+            <a href="#">Categoria3</a>         
+        </div>
+      </div>
+    </nav>
+</body>
+<main>
+  {%block content%} {%endblock%}
+</main>
+<footer> 
+ <div class="footer"> 
+    <div class="social_media">
+      <h2>Síguenos en Redes Sociales</h2>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+    </div>
+    <p>Tienda Gamer 2023 - Derechos Reservados</p> 
+  </div>
+  
+
+</footer>
+</html>
