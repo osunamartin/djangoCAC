@@ -14,25 +14,25 @@
   <h1>Tienda Gamer</h1>
   <h2>{%block section_title%} {%endblock%}</h2>
 </header>
-<body>
-    
-    <nav>
-      <div class="navbar"></div>
-        <a href="{% url 'index' %}">Inicio</a>
-        <a href="{% url 'nosotros' %}">Nosotros</a>
-        <a href="{% url 'contacto' %}">Contacto</a>
-        
-        <div class="dropdown">
-          <a href="{% url 'producto_lista' %}">Productos</a>
-            <i class="fa fa-caret-down"></i>
-          
-          <div class="dropdown-content">
-            <a href="#">Categoria1</a>
-            <a href="#">Categoria2</a>
-            <a href="#">Categoria3</a>         
-        </div>
+<nav>
+  <div class="navbar">
+    <a href="{% url 'index' %}">Inicio</a>
+    <a href="{% url 'nosotros' %}">Nosotros</a>
+    <div class="dropdown">
+      <a href="{% url 'producto_lista' %}" class="dropbtn">Productos</a>
+      <div class="dropdown-content">
+        <a href="#">PC</a>
+        <a href="#">Consolas</a>
+        <a href="#">Videojuegos</a>
       </div>
-    </nav>
+    </div>
+    <a href="{% url 'contacto' %}">Contacto</a>
+  </div>
+  
+</nav>
+
+<body>
+
 </body>
 <main>
   {%block content%} {%endblock%}

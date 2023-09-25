@@ -11,7 +11,7 @@ nav {
   padding: 10px 0;
 }
 
-ul {
+/* ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -21,7 +21,7 @@ ul {
 li {
   display: inline;
   margin-right: 20px;
-}
+} */
 
 a {
   text-decoration: none;
@@ -29,31 +29,67 @@ a {
   font-weight: bold;
 }
 
-/* menú desplegable */
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #555;
+}
+
+/* Style for the dropdown menu */
 .dropdown {
-  position: relative;
-  display: inline-block;
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  margin: 0;
+  padding: 14px 16px;
+  cursor: pointer;
 }
 
 .dropdown-content {
+  margin-top: 45px;
   display: none;
   position: absolute;
   background-color: #333;
-  min-width: 200px;
+  min-width: 160px;
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: #fff;
-  padding: 10px;
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
   display: block;
   text-align: left;
 }
 
+.dropdown-content a:hover {
+  background-color: #555;
+}
+
+/* Show the dropdown menu when hovering over the dropdown button */
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 
 /* Estilo base para el footer */
 .footer {
@@ -66,15 +102,21 @@ a {
   text-align: center;
 }
 
-/* Estilos para la caja del producto */
+ 
+.contenedor {
+  display: flex;
+  gap: 20px;
+}
+
 .contenedor-producto {
+  margin: 5px;
   width: 300px;
   border: 1px solid #ddd;
   padding: 10px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease; /* Transición de escala */
-  overflow: hidden; /* Evita que el contenido desborde en la animación */
+  transition: transform 0.3s ease; 
+  overflow: hidden;
 }
 
 .contenedor-producto:hover {
