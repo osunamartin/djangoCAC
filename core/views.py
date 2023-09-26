@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from datetime import datetime
+from .forms import ContactoForm
 
 # Create your views here.
 def index(request):
@@ -12,12 +13,14 @@ def index(request):
   
   return render(request, "core/index.html", context)
 
+
 def producto_lista(request):
   context = {
     'nombre_usuario': 'Juan',
     'hay_stock': True,
   }
   return render(request, 'core/productos_lista.html', context)
+
 
 def producto_detalle(request, nombre_producto):
   return HttpResponse(
@@ -27,13 +30,22 @@ def producto_detalle(request, nombre_producto):
     """
   )
 
+
 def producto_hay_stock(request, hay_stock):
+
   return HttpResponse(f'¿Hay stock de este producto?: {hay_stock}') 
 
+
 def contacto(request):
-  context = {}
+
+  formulario = ContactoForm()
+
+  context = {
+    'contacto_form': formulario
+  }
   
-  return render(request, 'core/formContacto.html')
+  return render(request, 'core/formContacto.html', context)
+
 
 def quienesSomos(request):
 
