@@ -1,4 +1,3 @@
-
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -18,13 +17,18 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="tel"],
 textarea {
     width: 95%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+}
+
+textarea#id_mensaje {
+    width: 95%; /* Ancho completo del área de texto (puedes ajustar esto) */
+    height: 80px; /* Altura del área de texto (ajusta según tus necesidades) */
+    resize: none; /* Evitar que el usuario pueda redimensionar el área de texto */
 }
 
 
