@@ -1,9 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib import messages
 from datetime import datetime
 from .forms import ContactoForm
+from .models import Persona
 
 # Create your views here.
+
 def index(request):
   context = {
     'nombre_usuario':'Juan',
@@ -38,8 +42,30 @@ def producto_hay_stock(request, hay_stock):
 
 def contacto(request):
 
-  formulario = ContactoForm()
+  if request.method == 'POST':
+    # Instanciamos un formulario con datos
+    formulario = ContactoForm(request.POST)
 
+    # Validacion
+    if formulario.is_valid():
+      # Dar de alta la info
+
+      nueva_persona = Persona(
+        nombre = formulario.cleaned_data['nombre'],
+        apellido = formulario.cleaned_data['apellido'],
+        email = formulario.cleaned_data['email'],
+      )
+
+      nueva_persona.save()
+
+      messages.info(request, "Consulta enviada con exito")
+      return redirect(reverse("index"))
+
+    
+  else: # GET
+    formulario = ContactoForm()
+
+  
   context = {
     'contacto_form': formulario
   }

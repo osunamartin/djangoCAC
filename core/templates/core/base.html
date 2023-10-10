@@ -10,6 +10,15 @@
     {% block extra_css%}{%endblock%}
 </head>
 <header>
+  
+  {% if messages %}
+    <ul class ="messages">
+    {% for message in messages %}
+      <li {% if message.tags %} class ="{{ message.tags }}" {% endif %}> {{ message }} </li>
+    {% endfor %}  
+    </ul>
+  {% endif %}
+
   <h1>Tienda Gamer</h1>
   <h2>{%block section_title%} {%endblock%}</h2>
 </header>
@@ -34,6 +43,8 @@
 
 </body>
 <main>
+
+
   {%block content%} {%endblock%}
 </main>
 <footer> 
