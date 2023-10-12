@@ -1,4 +1,5 @@
 {%extends "core/base.html"%}
+{% load static %}
 
 {%block section_title%} Listado de Productos {%endblock%}
 {%block content%}
@@ -11,19 +12,19 @@
         
 
       <div class="contenedor-producto">
-        <img src="core/static/core/css/base.css" alt="ryzen3">
+        <img src="{% static 'core/img/ryzen3.jpg' %}" alt="ryzen3">
         <h3>Ryzen 3</h3>
         <p>Precio: $99.99</p>
       </div>
 
       <div class="contenedor-producto">
-        <img src="#" alt="mouse-logitech">
+        <img src="{% static 'core/img/mouse-logitech.jpg' %}" alt="mouse-logitech">
         <h3>Mouse Logitech</h3>
         <p>Precio: $49.99</p>
       </div>
 
       <div class="contenedor-producto">
-        <img src="#" alt="1050ti">
+        <img src="{% static 'core/img/1050ti.jpg' %}" alt="1050ti">
         <h3>Geforce 1050ti</h3>
         <p>Precio: $129.99</p>
       </div>
