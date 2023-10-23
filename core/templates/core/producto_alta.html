@@ -1,0 +1,16 @@
+{%extends "core/base.html"%}
+
+
+
+{%block section_title%} Alta de Productos {%endblock%}
+{%block content%}
+  <form action="{% url 'producto_alta' %}" method="post">
+    {% csrf_token %}
+    {{ producto_alta_form }}
+    <input type="submit" value="Dar de Alta">
+  </form>
+
+
+{%endblock%}
+
+

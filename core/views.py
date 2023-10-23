@@ -3,8 +3,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from datetime import datetime
-from .forms import ContactoForm
-from .models import Persona
+from .forms import ContactoForm, ProductoAltaForm
+from .models import Persona, Producto
+from django.views.generic.list import ListView
 
 # Create your views here.
 
@@ -18,12 +19,37 @@ def index(request):
   return render(request, "core/index.html", context)
 
 
+def producto_alta(request):
+  context = {}
+
+  if request.method == "POST":
+    producto_alta_form = ProductoAltaForm(request.POST)
+
+    if producto_alta_form.is_valid(): 
+      nuevo_producto = Producto (
+        nombre=producto_alta_form.cleaned_data['nombre'],
+        precio=producto_alta_form.cleaned_data['precio'],
+        descripcion=producto_alta_form.cleaned_data['descripcion'],
+        stock=producto_alta_form.cleaned_data['stock']
+
+      )
+
+      nuevo_producto.save()
+      messages.info(request, "Producto creado con éxito")
+      return redirect(reverse("producto_lista"))
+
+  else:
+    producto_alta_form = ProductoAltaForm()
+    context['producto_alta_form'] = ProductoAltaForm
+
+  return render(request, 'core/producto_alta.html', context)
+
 def producto_lista(request):
   context = {
     'nombre_usuario': 'Juan',
     'hay_stock': True,
   }
-  return render(request, 'core/productos_lista.html', context)
+  return render(request, 'core/producto_lista.html', context)
 
 
 def producto_detalle(request, nombre_producto):
@@ -38,6 +64,12 @@ def producto_detalle(request, nombre_producto):
 def producto_hay_stock(request, hay_stock):
 
   return HttpResponse(f'¿Hay stock de este producto?: {hay_stock}') 
+
+def ProductoListView(ListView):
+  model = Producto
+  context_object_name = 'productos'
+  template_name = 'core/producto_lista.html'
+  ordering = ['stock']
 
 
 def contacto(request):
