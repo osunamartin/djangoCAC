@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import Producto
 
 
 class ContactoForm(forms.Form):
@@ -31,7 +32,7 @@ class ContactoForm(forms.Form):
         pass
 
 class ProductoAltaForm(forms.Form):
-    nombre = forms.CharField(label="nombre del Producto",required=True)
+    producto = forms.CharField(label="nombre del Producto",required=True)
     precio = forms.IntegerField(label="precio del producto",required=True)
     descripcion = forms.CharField(label="descripcion del producto")
     #categoria = forms.ForeignKey(label="categoria") -- VER QUÉ ONDA ESTO
@@ -41,6 +42,16 @@ class ProductoAltaForm(forms.Form):
         if self.cleaned_data["precio"] < 0:
             raise ValidationError("Ingrese un precio válido")
         
-        return self.cleaned_data["precio"]
+        return self.cleaned_data["precio"] 
     
+class AltaProductoModelForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = '__all__'
+
+    def clean_precio(self):
+        if self.cleaned_data["precio"] < 0:
+            raise ValidationError("Ingrese un precio válido")
+        
+        return self.cleaned_data["precio"]
  

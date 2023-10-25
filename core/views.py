@@ -3,10 +3,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from datetime import datetime
-from .forms import ContactoForm, ProductoAltaForm
+from .forms import ContactoForm, AltaProductoModelForm,ProductoAltaForm
 from .models import Persona, Producto
 from django.views.generic.list import ListView
-
+from django.views.generic.edit import CreateView
 # Create your views here.
 
 def index(request):
@@ -27,7 +27,7 @@ def producto_alta(request):
 
     if producto_alta_form.is_valid(): 
       nuevo_producto = Producto (
-        nombre=producto_alta_form.cleaned_data['nombre'],
+        producto=producto_alta_form.cleaned_data['producto'],
         precio=producto_alta_form.cleaned_data['precio'],
         descripcion=producto_alta_form.cleaned_data['descripcion'],
         stock=producto_alta_form.cleaned_data['stock']
@@ -110,3 +110,19 @@ def quienesSomos(request):
   return render(request, 'core/quienesSomos.html')
 
 
+'''
+  Checkear esto, para que se den de alta y se creen así las vistas:
+
+  class ProductoCreateView(CreateView):
+    model = Producto
+    context_object_name = ''
+    template_name = 'core/producto_alta.html'
+    sucess_url = 'producto_lista'
+    form_class = AltaProductoModelForm
+
+class ProductoListView (ListView):
+  model = Producto
+  context_object_name = ''
+  template_name = 'core/productos_lista.html'''
+
+  
