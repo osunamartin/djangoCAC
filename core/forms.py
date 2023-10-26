@@ -31,18 +31,18 @@ class ContactoForm(forms.Form):
     def clean(self):
         pass
 
-class ProductoAltaForm(forms.Form):
-    producto = forms.CharField(label="nombre del Producto",required=True)
-    precio = forms.IntegerField(label="precio del producto",required=True)
-    descripcion = forms.CharField(label="descripcion del producto")
+#class ProductoAltaForm(forms.Form):
+ #   producto = forms.CharField(label="nombre del Producto",required=True)
+ #   precio = forms.IntegerField(label="precio del producto",required=True)
+ #   descripcion = forms.CharField(label="descripcion del producto")
     #categoria = forms.ForeignKey(label="categoria") -- VER QUÉ ONDA ESTO
-    stock = forms.IntegerField(label="stock",required=True)
+ #   stock = forms.IntegerField(label="stock",required=True)
 
-    def clean_precio(self):
-        if self.cleaned_data["precio"] < 0:
-            raise ValidationError("Ingrese un precio válido")
-        
-        return self.cleaned_data["precio"] 
+  #  def clean_precio(self):
+ #       if self.cleaned_data["precio"] < 0:
+  #          raise ValidationError("Ingrese un precio válido")
+  #      
+ #       return self.cleaned_data["precio"] 
     
 class ProductoAltaForm(forms.ModelForm):
     class Meta:
