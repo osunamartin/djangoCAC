@@ -17,7 +17,7 @@ class Proveedor(models.Model):
     email = models.EmailField(max_length=40, verbose_name="Email del proveedor")   
     
 class Producto (models.Model):
-    producto = models.CharField(max_length=100, verbose_name="nombre del producto")
+    nombre = models.CharField(max_length=100, verbose_name="nombre del producto")
     precio = models.IntegerField(verbose_name="precio")
     descripcion = models.CharField(max_length=200,null=True, verbose_name="descripcion del producto")
     categoria = models.ManyToManyField(Categoria, through='Categoria_Producto')

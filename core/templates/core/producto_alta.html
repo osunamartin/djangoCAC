@@ -6,7 +6,7 @@
 {%block content%}
   <form action="{% url 'producto_alta' %}" method="post">
     {% csrf_token %}
-    {{ producto_alta_form }}
+    {{ form }}
     <input type="submit" value="Dar de Alta">
   </form>
 

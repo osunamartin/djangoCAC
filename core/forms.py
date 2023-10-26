@@ -44,7 +44,7 @@ class ProductoAltaForm(forms.Form):
         
         return self.cleaned_data["precio"] 
     
-class AltaProductoModelForm(forms.ModelForm):
+class ProductoAltaForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = '__all__'
