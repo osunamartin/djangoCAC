@@ -1,10 +1,14 @@
 {%extends "core/base.html"%}
+{% load static %}
 
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'core/css/producto_alta.css' %}">
+{%endblock%}
 
 
 {%block section_title%} Alta de Productos {%endblock%}
 {%block content%}
-  <form action="{% url 'producto_alta' %}" method="post">
+  <form action="{% url 'producto_alta' %}" method="post" class="product-form">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Dar de Alta">
