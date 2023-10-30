@@ -8,7 +8,7 @@
 
 {%block section_title%} Alta de Productos {%endblock%}
 {%block content%}
-  <form action="{% url 'producto_alta' %}" method="post" class="product-form">
+  <form action="{% url 'producto_alta' %}" method="post" class="product-form" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Dar de Alta">

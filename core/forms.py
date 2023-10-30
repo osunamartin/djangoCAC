@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Producto
+from .models import Producto, Categoria, Proveedor
 
 
 class ContactoForm(forms.Form):
@@ -48,6 +48,14 @@ class ProductoAltaForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = '__all__'
+
+    categoria = forms.ModelMultipleChoiceField(
+        queryset=Categoria.objects.all(),
+        widget=forms.CheckboxSelectMultiple,  # Esto permite la selección múltiple
+        label="Categoría(s) del producto"
+    )
+    
+    proveedor = forms.ModelChoiceField(queryset=Proveedor.objects.all(), label="Proveedor del producto")
 
     def clean_precio(self):
         if self.cleaned_data["precio"] < 0:

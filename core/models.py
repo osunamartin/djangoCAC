@@ -10,11 +10,17 @@ class Persona(models.Model):
 class Categoria(models.Model):
     categoria = models.CharField(max_length=30, verbose_name="nombre de la categoría")
     baja = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.categoria
     
 class Proveedor(models.Model):
     proveedor = models.CharField(max_length=30, verbose_name="nombre del proveedor")
     telefono = models.IntegerField(verbose_name="numero de telefono")
-    email = models.EmailField(max_length=40, verbose_name="Email del proveedor")   
+    email = models.EmailField(max_length=40, verbose_name="Email del proveedor")
+
+    def __str__(self):
+        return self.proveedor  
     
 class Producto (models.Model):
     nombre = models.CharField(max_length=100, verbose_name="nombre del producto")
@@ -23,6 +29,8 @@ class Producto (models.Model):
     categoria = models.ManyToManyField(Categoria, through='Categoria_Producto')
     stock = models.IntegerField(verbose_name="stock")
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='productos/', null=False, verbose_name="Imagen del producto")
+
 
 class Categoria_Producto (models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
