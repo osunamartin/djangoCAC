@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from datetime import datetime
-from .forms import ContactoForm,ProductoAltaForm
+from .forms import ContactoForm, ProductoAltaForm
 from .models import Persona, Producto
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
@@ -48,12 +48,6 @@ def producto_hay_stock(request, hay_stock):
 
   return HttpResponse(f'¿Hay stock de este producto?: {hay_stock}') 
 
-def ProductoListView(ListView):
-  model = Producto
-  context_object_name = 'productos'
-  template_name = 'core/producto_lista.html'
-  ordering = ['stock']
-
 
 def contacto(request):
 
@@ -93,19 +87,7 @@ def quienesSomos(request):
   return render(request, 'core/quienesSomos.html')
 
 
-'''
-  Checkear esto, para que se den de alta y se creen así las vistas:
-
-  class ProductoCreateView(CreateView):
+class ProductoListView(ListView):
     model = Producto
-    context_object_name = ''
-    template_name = 'core/producto_alta.html'
-    sucess_url = 'producto_lista'
-    form_class = AltaProductoModelForm
-
-class ProductoListView (ListView):
-  model = Producto
-  context_object_name = ''
-  template_name = 'core/productos_lista.html'''
-
-  
+    template_name = 'core/producto_lista.html'  # Nombre de la plantilla HTML
+    context_object_name = 'productos'
