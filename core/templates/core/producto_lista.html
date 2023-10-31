@@ -1,9 +1,25 @@
 {%extends "core/base.html"%}
+{% load static %}
 
 {%block section_title%} Listado de Productos {%endblock%}
 {%block content%}
-  
-  <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
+
+<h1>Lista de Productos</h1>
+
+  <ul>
+    {% for producto in productos %}
+      <li>
+        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+        <h2>{{ producto.nombre }}</h2>
+        <p>Precio: ${{ producto.precio }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+
+
+
+ <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
 
       {% if hay_stock %}
           <p style="color: green;">Stock Disponible</p>

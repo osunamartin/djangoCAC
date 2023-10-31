@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from datetime import datetime
-from .forms import ContactoForm, AltaProductoModelForm,ProductoAltaForm
+from .forms import ContactoForm, ProductoAltaForm
 from .models import Persona, Producto
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
@@ -19,30 +19,13 @@ def index(request):
   return render(request, "core/index.html", context)
 
 
-def producto_alta(request):
-  context = {}
+class ProductoCreateView(CreateView):
+    model = Producto
+    template_name = 'core/producto_alta.html'
+    context_object_name = "alta_producto_form"
+    form_class = ProductoAltaForm
+    success_url = reverse_lazy("producto_lista")
 
-  if request.method == "POST":
-    producto_alta_form = ProductoAltaForm(request.POST)
-
-    if producto_alta_form.is_valid(): 
-      nuevo_producto = Producto (
-        producto=producto_alta_form.cleaned_data['producto'],
-        precio=producto_alta_form.cleaned_data['precio'],
-        descripcion=producto_alta_form.cleaned_data['descripcion'],
-        stock=producto_alta_form.cleaned_data['stock']
-
-      )
-
-      nuevo_producto.save()
-      messages.info(request, "Producto creado con éxito")
-      return redirect(reverse("producto_lista"))
-
-  else:
-    producto_alta_form = ProductoAltaForm()
-    context['producto_alta_form'] = ProductoAltaForm
-
-  return render(request, 'core/producto_alta.html', context)
 
 def producto_lista(request):
   context = {
@@ -64,12 +47,6 @@ def producto_detalle(request, nombre_producto):
 def producto_hay_stock(request, hay_stock):
 
   return HttpResponse(f'¿Hay stock de este producto?: {hay_stock}') 
-
-def ProductoListView(ListView):
-  model = Producto
-  context_object_name = 'productos'
-  template_name = 'core/producto_lista.html'
-  ordering = ['stock']
 
 
 def contacto(request):
@@ -110,19 +87,7 @@ def quienesSomos(request):
   return render(request, 'core/quienesSomos.html')
 
 
-'''
-  Checkear esto, para que se den de alta y se creen así las vistas:
-
-  class ProductoCreateView(CreateView):
+class ProductoListView(ListView):
     model = Producto
-    context_object_name = ''
-    template_name = 'core/producto_alta.html'
-    sucess_url = 'producto_lista'
-    form_class = AltaProductoModelForm
-
-class ProductoListView (ListView):
-  model = Producto
-  context_object_name = ''
-  template_name = 'core/productos_lista.html'''
-
-  
+    template_name = 'core/producto_lista.html'  # Nombre de la plantilla HTML
+    context_object_name = 'productos'
