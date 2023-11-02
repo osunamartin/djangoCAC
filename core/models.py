@@ -31,10 +31,16 @@ class Producto (models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='productos/', null=False, verbose_name="Imagen del producto")
 
+    def __str__(self):
+        return self.nombre
+
 
 class Categoria_Producto (models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.categoria
 
 class Wishlist(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE) #a qué persona está asociada la lista de deseados
