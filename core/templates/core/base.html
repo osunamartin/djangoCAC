@@ -21,6 +21,16 @@
 
   <h1>Tienda Gamer</h1>
   <h2>{%block section_title%} {%endblock%}</h2>
+  <div class="login">
+    {% if not user.is_authenticated %}
+      <a href="{% url 'login' %}" style="color: black;">Login</a>
+    {%endif%}
+    
+    {% if user.is_authenticated %}
+      <p>Bienvenid@ {{user.username}}</p>
+      <a href="{% url 'logout' %}" style="color: black;">Logout </a>
+    {%endif%}
+  </div>
 </header>
 <nav>
   <div class="navbar">

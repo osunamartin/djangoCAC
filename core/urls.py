@@ -3,9 +3,12 @@ from . import views
 from .views import ProductoListView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     #path('', views., name=""),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='core/login.html'),name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', views.index, name="index"),
     path('contacto', views.contacto, name="contacto"),
     path('Nosotros', views.quienesSomos, name="nosotros"),
