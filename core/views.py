@@ -93,3 +93,12 @@ class ProductoListView(ListView):
     model = Producto
     template_name = 'core/producto_lista.html'  # Nombre de la plantilla HTML
     context_object_name = 'productos'
+
+def buscar_producto(request):
+  if request.method == "POST":
+    buscado = request.POST['buscado']
+    productos = Producto.objects.filter(nombre__icontains=buscado)
+    return render(request, "core/buscar_producto.html", {'buscado': buscado, 'productos': productos})
+  
+  else:
+    return render(request, "core/buscar_producto.html")

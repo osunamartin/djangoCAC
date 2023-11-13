@@ -6,6 +6,15 @@
 
 <h1>Lista de Productos</h1>
 
+
+<form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
+  {%csrf_token%}
+  <input type="search" name="buscado" placeholder="Buscar Producto"> 
+  <button type="submit">Buscar</button>
+</form>
+
+
+
   <ul>
     {% for producto in productos %}
       <li>

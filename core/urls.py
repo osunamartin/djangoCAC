@@ -18,7 +18,8 @@ urlpatterns = [
     path('producto/detalle/<str:nombre_producto>', views.producto_detalle, name="producto_detalle"),
     path('producto/hay_stock', views.producto_hay_stock, {'hay_stock': 'si'} , name="hay_stock"),
     path('producto/no_hay_stock', views.producto_hay_stock, {'hay_stock': 'no'} , name="no_hay_stock"),
-] 
+    path('buscar_producto', views.buscar_producto, name="buscar_producto"),
+]   
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

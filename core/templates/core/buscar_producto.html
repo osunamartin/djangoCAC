@@ -1,0 +1,18 @@
+{%extends "core/base.html"%}
+
+{%block section_title%} Búsqueda de Productos {%endblock%}
+{%block content%}
+    
+      {% if buscado %}
+            <h2> Resultados para: {{ buscado }} </h2>
+            <br/>
+            {% for producto in productos %}
+                  {{ producto.nombre }} <br/>
+            {% endfor %}
+
+      {% else %}
+            <h2>Ups, no buscaste ningún producto.</h2>      
+
+      {% endif %}
+
+{%endblock%}
