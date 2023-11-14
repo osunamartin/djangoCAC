@@ -22,7 +22,6 @@ sitio_admin.register(Producto)
 sitio_admin.register(Categoria)
 #sitio_admin.register(Categoria_Producto)
 sitio_admin.register(Wishlist)
-
 """
 
 admin.site.register(Persona)

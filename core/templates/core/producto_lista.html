@@ -6,13 +6,15 @@
 
 <h1>Lista de Productos</h1>
 
-
 <form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
   {%csrf_token%}
   <input type="search" name="buscado" placeholder="Buscar Producto"> 
   <button type="submit">Buscar</button>
 </form>
 
+{% if perms.core.add_producto %}
+  <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
+{% endif %}
 
 
   <ul>
@@ -26,9 +28,6 @@
   </ul>
 
 
-
-
- <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
 
       {% if hay_stock %}
           <p style="color: green;">Stock Disponible</p>

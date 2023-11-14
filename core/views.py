@@ -1,8 +1,9 @@
 from django.http import HttpResponse
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 #from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
 from .forms import ContactoForm, ProductoAltaForm
@@ -20,7 +21,8 @@ def index(request):
   
   return render(request, "core/index.html", context)
 
-
+@method_decorator(login_required, name='dispatch')
+@method_decorator(permission_required('core.add_producto', raise_exception=True), name='dispatch')
 class ProductoCreateView(CreateView):
     model = Producto
     template_name = 'core/producto_alta.html'
@@ -28,6 +30,19 @@ class ProductoCreateView(CreateView):
     form_class = ProductoAltaForm
     success_url = reverse_lazy("producto_lista")
 
+class ProductoListView(ListView):
+    model = Producto
+    template_name = 'core/producto_lista.html'  # Nombre de la plantilla HTML
+    context_object_name = 'productos'
+
+def buscar_producto(request):
+  if request.method == "POST":
+    buscado = request.POST['buscado']
+    productos = Producto.objects.filter(nombre__icontains=buscado)
+    return render(request, "core/buscar_producto.html", {'buscado': buscado, 'productos': productos})
+  
+  else:
+    return render(request, "core/buscar_producto.html")
 
 def producto_lista(request):
   context = {
@@ -87,18 +102,3 @@ def contacto(request):
 def quienesSomos(request):
 
   return render(request, 'core/quienesSomos.html')
-
-
-class ProductoListView(ListView):
-    model = Producto
-    template_name = 'core/producto_lista.html'  # Nombre de la plantilla HTML
-    context_object_name = 'productos'
-
-def buscar_producto(request):
-  if request.method == "POST":
-    buscado = request.POST['buscado']
-    productos = Producto.objects.filter(nombre__icontains=buscado)
-    return render(request, "core/buscar_producto.html", {'buscado': buscado, 'productos': productos})
-  
-  else:
-    return render(request, "core/buscar_producto.html")
