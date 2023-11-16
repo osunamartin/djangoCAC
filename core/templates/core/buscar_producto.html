@@ -7,7 +7,16 @@
             <h2> Resultados para: {{ buscado }} </h2>
             <br/>
             {% for producto in productos %}
-                  {{ producto.nombre }} <br/>
+                <li>
+                  <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+                  <h2>{{ producto.nombre }}</h2>
+                  <p>Precio: ${{ producto.precio }}</p>
+                  {% if producto.stock > 0 %}
+                      <p style="color: green;">Stock Disponible</p>
+                    {% else %}
+                      <p style="color: red;">No hay stock</p>
+                  {% endif %}
+                </li>
             {% endfor %}
 
       {% else %}

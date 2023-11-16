@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from core.views import CustomLoginView
 #from core.admin import sitio_admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game_shop/', include('core.urls')),
+    path('accounts/login/', CustomLoginView.as_view(), name='login'),
 ]
 
 if settings.DEBUG:

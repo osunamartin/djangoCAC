@@ -7,6 +7,11 @@
 {%block section_title%} Listado de Productos {%endblock%}
 {%block content%}
 
+{% if perms.core.add_producto %}
+  <br>
+  <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
+  <br>
+{% endif %}
 <h1>Lista de Productos</h1>
 
 <form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
@@ -14,12 +19,8 @@
   <input type="search" name="buscado" placeholder="Buscar Producto"> 
   <button type="submit">Buscar</button>
 </form>
-
-{% if perms.core.add_producto %}
-  <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
-{% endif %}
-
-
+<br>
+<a style="color:blue" href="{% url 'wishlist' %}">Wishlist</a>
   <ul>
     {% for producto in productos %}
       <li>

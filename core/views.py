@@ -10,6 +10,7 @@ from .forms import ContactoForm, ProductoAltaForm
 from .models import Persona, Producto, Wishlist
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
+from django.contrib.auth.views import LoginView
 # Create your views here.
 
 def index(request):
@@ -40,6 +41,21 @@ class WishlistListView(ListView):
     model = Wishlist
     template_name = 'core/wishlist.html'  # Nombre de la plantilla HTML
     context_object_name = 'wishlist'
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.info(request, 'Inicio de sesión requerido para acceder a la wish list.')
+            return HttpResponse(status=403)  # Devuelve un código de acceso prohibido si no está autenticado
+        return super().get(request, *args, **kwargs)
+
+    
+class CustomLoginView(LoginView):
+    template_name = 'core/login.html'  # Nombre de tu plantilla de inicio de sesión
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['message'] = 'Inicio de sesión requerido'
+        return context
 
 def buscar_producto(request):
   if request.method == "POST":
