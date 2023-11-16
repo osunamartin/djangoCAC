@@ -1,5 +1,6 @@
 from django.contrib import admin
 from core.models import *
+from django import forms
 # Register your models here.
 
 '''class CategoriAdmin(admin.ModelAdmin):
@@ -24,9 +25,29 @@ sitio_admin.register(Categoria)
 sitio_admin.register(Wishlist)
 """
 
-admin.site.register(Persona)
-admin.site.register(Proveedor)
-admin.site.register(Producto)
-admin.site.register(Categoria)
-#sitio_admin.register(Categoria_Producto)
+class CategoriaProductoForm(forms.ModelForm):
+    class Meta:
+        model = Categoria_Producto
+        fields = '__all__'
+
+
+class CategoriaProductoInline(admin.TabularInline):
+    model = Categoria.productos.through
+    extra = 1
+    form = CategoriaProductoForm
+
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    inlines = [CategoriaProductoInline]
+
+
+@admin.register(Producto)
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'descripcion', 'proveedor', 'precio', 'stock')
+    list_editable = ('descripcion', 'proveedor', 'precio', 'stock')
+    list_display_links = ('nombre',)
+    search_fields = ['proveedor']
+
 admin.site.register(Wishlist)
+admin.site.register(Proveedor)
