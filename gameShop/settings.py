@@ -19,8 +19,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-MEDIA_URL = '/productos/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'productos')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'C:\\Users\\leand\\OneDrive\\Cursos\\Codo a Codo\\2do Cuatrimestre\\gameshop-main3\\djangoCAC\\media'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 

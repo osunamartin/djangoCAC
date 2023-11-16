@@ -52,7 +52,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'descripcion', 'proveedor', 'precio', 'stock')
+    list_display = ('nombre', 'descripcion', 'proveedor', 'precio', 'stock', 'imagen')
     list_editable = ('descripcion', 'proveedor', 'stock')
     list_display_links = ('nombre',)
     search_fields = ['nombre']
