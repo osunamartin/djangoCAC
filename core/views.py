@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 #from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
 from .forms import ContactoForm, ProductoAltaForm
-from .models import Persona, Producto
+from .models import Persona, Producto, Wishlist
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 # Create your views here.
@@ -34,6 +34,12 @@ class ProductoListView(ListView):
     model = Producto
     template_name = 'core/producto_lista.html'  # Nombre de la plantilla HTML
     context_object_name = 'productos'
+    
+@method_decorator(login_required, name='dispatch')
+class WishlistListView(ListView):
+    model = Wishlist
+    template_name = 'core/wishlist.html'  # Nombre de la plantilla HTML
+    context_object_name = 'wishlist'
 
 def buscar_producto(request):
   if request.method == "POST":

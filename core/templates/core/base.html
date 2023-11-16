@@ -45,6 +45,9 @@
       </div>
     </div>
     <a href="{% url 'contacto' %}">Contacto</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'wishlist' %}">Wishlist</a>
+    {%endif%}
   </div>
   
 </nav>

@@ -11,6 +11,7 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', views.index, name="index"),
     path('contacto', views.contacto, name="contacto"),
+    path('wishlist', views.WishlistListView.as_view(), name="wishlist"),
     path('Nosotros', views.quienesSomos, name="nosotros"),
     path('producto/alta', views.ProductoCreateView.as_view(), name="producto_alta"),
     path('producto/lista', ProductoListView.as_view(), name='producto_lista'),
