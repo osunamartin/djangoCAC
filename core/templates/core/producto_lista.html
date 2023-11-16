@@ -1,5 +1,8 @@
 {%extends "core/base.html"%}
 {% load static %}
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'core/css/producto_lista.css' %}">
+{%endblock%}
 
 {%block section_title%} Listado de Productos {%endblock%}
 {%block content%}
@@ -23,18 +26,23 @@
         <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
         <h2>{{ producto.nombre }}</h2>
         <p>Precio: ${{ producto.precio }}</p>
+        {% if producto.stock > 0 %}
+            <p style="color: green;">Stock Disponible</p>
+          {% else %}
+            <p style="color: red;">No hay stock</p>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>
 
 
-
+<!--
       {% if hay_stock %}
           <p style="color: green;">Stock Disponible</p>
         {% else %}
           <p style="color: red;">No hay stock</p>
       {% endif %}
-        
+    
       <div class="contenedor">
         <div class="contenedor-producto">
           <img src="../../static/core/img/ryzen3.jpg" alt="ryzen3">
@@ -54,7 +62,7 @@
           <p>Precio: $129.99</p>
         </div>
       </div>
-
+-->
 {%endblock%}
 
 

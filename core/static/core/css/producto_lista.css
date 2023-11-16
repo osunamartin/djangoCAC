@@ -1,0 +1,32 @@
+/* Estilo para la lista */
+ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Estilo para cada ítem de la lista */
+  ul li {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  /* Estilo para la imagen */
+  ul li img {
+    display: block;
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para el nombre del producto */
+  ul li h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilo para el precio */
+  ul li p {
+    font-size: 14px;
+    color: #888;
+  }
