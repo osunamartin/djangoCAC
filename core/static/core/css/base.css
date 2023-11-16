@@ -1,10 +1,55 @@
 
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
+
+main {
+  flex:1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .actions {
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+header .actions a {
+  text-decoration: none;
+  display: inline-block;
+  background-color: darkturquoise;
+  padding: 15px;
+  border-radius: 5px;
+
+  margin: 0 15px;
+
+  color: white;
+
+  transition: 0.2s all;
+}
+
+header .actions a.login {
+  background-color: rgb(32, 174, 230);
+}
+
+header .actions a.logout {
+  background-color: red;
+}
+
+
+header .actions a:hover {
+  background-color: white;
+  color: black;
+}
+
 
 nav {
   background-color: #333;
@@ -98,7 +143,6 @@ a {
   color: #fff; /* Cambia el color del texto según tu diseño */
   width: 100%;
   padding: 10px 10px 0px 10px;
-  bottom: 0;
   text-align: center;
 }
 
