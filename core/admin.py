@@ -1,6 +1,7 @@
 from django.contrib import admin
 from core.models import *
 from django import forms
+from django.contrib.admin.widgets import FilteredSelectMultiple
 # Register your models here.
 
 '''class CategoriAdmin(admin.ModelAdmin):
@@ -25,6 +26,37 @@ sitio_admin.register(Categoria)
 sitio_admin.register(Wishlist)
 """
 
+# ------------------------------------------------------------------------------------------ #
+
+# class CategoriaProductoForm(forms.ModelForm):
+#     class Meta:
+#         model = Categoria_Producto
+#         fields = '__all__'
+#         widgets = {
+#             'producto': FilteredSelectMultiple('Productos', False),
+#         }
+
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         producto = cleaned_data.get('producto')
+#         categoria = cleaned_data.get('categoria')
+
+#         if producto and categoria:
+#             # Verifica si el producto ya está asociado a la categoría
+#             if Categoria_Producto.objects.filter(producto=producto, categoria=categoria).exists():
+#                 raise forms.ValidationError("El producto ya se encuentra asociado a esta categoría")
+
+# class CategoriaProductoInline(admin.TabularInline):
+#     model = Categoria.productos.through
+#     form = CategoriaProductoForm
+#     extra = 1
+
+# @admin.register(Categoria)
+# class CategoriaAdmin(admin.ModelAdmin):
+#     inlines = [CategoriaProductoInline]
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------- #
 
 class CategoriaProductoForm(forms.ModelForm):
     class Meta:
@@ -37,18 +69,21 @@ class CategoriaProductoForm(forms.ModelForm):
         categoria = cleaned_data.get('categoria')
 
         if producto and categoria:
-            # Verificar si el producto ya está asociado a la categoría
+            # Verifica si el producto ya está asociado a la categoría
             if Categoria_Producto.objects.filter(producto=producto, categoria=categoria).exists():
-                raise forms.ValidationError("El producto ya está en esta categoría")
+                raise forms.ValidationError("El producto ya se encuentra asociado a esta categoría")
 
 class CategoriaProductoInline(admin.TabularInline):
     model = Categoria.productos.through
     form = CategoriaProductoForm
     extra = 1
 
+
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):
     inlines = [CategoriaProductoInline]
+
+# ----------------------------------------------------------------------------------------------------------------- #
 
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
@@ -57,6 +92,7 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display_links = ('nombre',)
     search_fields = ['nombre']
 
+
 admin.site.register(Proveedor)
 admin.site.register(Wishlist)
-admin.site.register(Categoria_Producto)
+#admin.site.register(Categoria_Producto)

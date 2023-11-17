@@ -22,6 +22,7 @@ header .actions {
   justify-content: space-evenly;
   align-items: center;
 }
+
 header .actions a {
   text-decoration: none;
   display: inline-block;
@@ -57,18 +58,6 @@ nav {
   padding: 10px 0;
 }
 
-/* ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-
-li {
-  display: inline;
-  margin-right: 20px;
-} */
-
 a {
   text-decoration: none;
   color: #fff;
@@ -92,6 +81,8 @@ a {
 .navbar a:hover {
   background-color: #555;
 }
+
+
 
 /* Style for the dropdown menu */
 .dropdown {
@@ -146,7 +137,44 @@ a {
   text-align: center;
 }
 
- 
+.login {
+  color:black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 .contenedor {
   display: flex;
   gap: 20px;
@@ -164,7 +192,7 @@ a {
 }
 
 .contenedor-producto:hover {
-  transform: scale(1.05); /* Escala aumenta al pasar el cursor */
+  transform: scale(1.05); /* Escala aumenta al pasar el cursor
 }
 
 .contenedor-producto img {
@@ -183,10 +211,20 @@ a {
 .contenedor-producto p {
   margin: 0;
   font-size: 1rem;
+} 
+*/
+
+/* ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
-.login {
-  color:black;
+li {
+  display: inline;
+  margin-right: 20px;
+} 
 
-}
+*/
 

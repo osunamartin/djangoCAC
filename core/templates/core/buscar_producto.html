@@ -7,21 +7,20 @@
             <h2> Resultados para: {{ buscado }} </h2>
             <br/>
             {% for producto in productos %}
-                <li>
-                  <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
-                  <h2>{{ producto.nombre }}</h2>
-                  <p>Precio: ${{ producto.precio }}</p>
-                  {% if producto.stock > 0 %}
-                      <p style="color: green;">Stock Disponible</p>
-                    {% else %}
-                      <p style="color: red;">No hay stock</p>
-                  {% endif %}
-                </li>
+                  <li>
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+                        <h2>{{ producto.nombre }}</h2>
+                        <p>Precio: ${{ producto.precio }}</p>
+                        {% if producto.stock > 0 %}
+                              <p style="color: green;">Stock Disponible</p>
+                        {% else %}
+                              <p style="color: red;">No hay stock</p>
+                        {% endif %}
+                  </li>
             {% endfor %}
 
       {% else %}
             <h2>Ups, no buscaste ningún producto.</h2>      
-
       {% endif %}
 
 {%endblock%}

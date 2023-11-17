@@ -17,6 +17,7 @@ class Proveedor(models.Model):
     def __str__(self):
         return self.proveedor  
     
+
 class Producto (models.Model):
     nombre = models.CharField(max_length=100, verbose_name="nombre del producto")
     precio = models.IntegerField(verbose_name="precio")
@@ -28,6 +29,7 @@ class Producto (models.Model):
     def __str__(self):
         return self.nombre
     
+
 class Categoria(models.Model):
     categoria = models.CharField(max_length=30, verbose_name="nombre de la categoría")
     baja = models.BooleanField(default=False)
@@ -40,7 +42,7 @@ class Categoria(models.Model):
 class Categoria_Producto (models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    
+       
 
 class Wishlist(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE) #a qué persona está asociada la lista de deseados

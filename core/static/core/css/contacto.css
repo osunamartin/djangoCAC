@@ -25,10 +25,11 @@ textarea {
     border-radius: 3px;
 }
 
+
 textarea#id_mensaje {
-    width: 95%; /* Ancho completo del área de texto (puedes ajustar esto) */
-    height: 80px; /* Altura del área de texto (ajusta según tus necesidades) */
-    resize: none; /* Evitar que el usuario pueda redimensionar el área de texto */
+    width: 95%; /* Ancho completo del área de texto*/
+    height: 80px; /* Altura del área de texto */
+    resize: none; /* Evita que el usuario pueda redimensionar el área de texto */
 }
 
 
