@@ -1,32 +1,45 @@
-/* Estilo para la lista */
-ul {
-    list-style: none;
-    padding: 0;
-  }
+/*Estilos para las contenedores de producto*/
+
+ 
   
-  /* Estilo para cada ítem de la lista */
-  ul li {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    
+
+  
+  .contenedor-producto {
+    
+    margin-top: 20px;
+    margin-right: 10px;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ddd;
     padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; 
+    overflow: hidden;
+    display: inline-table; 
+    
+    gap: 20px;
   }
   
-  /* Estilo para la imagen */
-  ul li img {
-    display: block;
-    width: 100px;
-    height: auto;
-    margin-bottom: 10px;
+  .contenedor-producto:hover {
+    transform: scale(1.05); 
   }
   
-  /* Estilo para el nombre del producto */
-  ul li h2 {
-    font-size: 18px;
-    margin-bottom: 5px;
+  .contenedor-producto img {
+    
+    height: 200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
   }
   
-  /* Estilo para el precio */
-  ul li p {
-    font-size: 14px;
-    color: #888;
+  .contenedor-producto h2 {
+    margin: 10px 0;
+    font-size: 1.2rem;
   }
+  
+  .contenedor-producto p {
+    margin: 0;
+    font-size: 1rem;
+  } 

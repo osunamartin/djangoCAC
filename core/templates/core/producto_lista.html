@@ -7,63 +7,39 @@
 {%block section_title%} Listado de Productos {%endblock%}
 {%block content%}
 
-{% if perms.core.add_producto %}
-  <br>
-  <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
-  <br>
-{% endif %}
-<h1>Lista de Productos</h1>
+  {% if perms.core.add_producto %}
+    <br>
+    <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
+    <br>
+  {% endif %}
+  <h1>Lista de Productos</h1>
 
-<form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
-  {%csrf_token%}
-  <input type="search" name="buscado" placeholder="Buscar Producto"> 
-  <button type="submit">Buscar</button>
-</form>
-<br>
-<a style="color:blue" href="{% url 'wishlist' %}">Wishlist</a>
-  <ul>
-    {% for producto in productos %}
-      <li>
-        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
-        <h2>{{ producto.nombre }}</h2>
-        <p>Precio: ${{ producto.precio }}</p>
-        {% if producto.stock > 0 %}
-            <p style="color: green;">Stock Disponible</p>
-          {% else %}
-            <p style="color: red;">No hay stock</p>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
-
-
-<!--
-      {% if hay_stock %}
+  <form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
+    {%csrf_token%}
+    <input type="search" name="buscado" placeholder="Buscar Producto"> 
+    <button type="submit">Buscar</button>
+  </form>
+ 
+  {% for producto in productos %}
+    <div class="contenedor-producto">
+      
+        
+      <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+      <h2>{{ producto.nombre }}</h2>
+      <p>Precio: ${{ producto.precio }}</p>
+      {% if producto.stock > 0 %}
           <p style="color: green;">Stock Disponible</p>
         {% else %}
           <p style="color: red;">No hay stock</p>
       {% endif %}
-    
-      <div class="contenedor">
-        <div class="contenedor-producto">
-          <img src="../../static/core/img/ryzen3.jpg" alt="ryzen3">
-          <h3>Ryzen 3</h3>
-          <p>Precio: $99.99</p>
-        </div>
+        
+      
+    </div>
+  {% endfor %}
 
-        <div class="contenedor-producto">
-          <img src="../../static/core/img/Mouse-logitech.jpg" alt="mouse-logitech">
-          <h3>Mouse Logitech</h3>
-          <p>Precio: $49.99</p>
-        </div>
 
-        <div class="contenedor-producto">
-          <img src="../../static/core/img/1050ti.jpg"  alt="1050ti">
-          <h3>Geforce 1050ti</h3>
-          <p>Precio: $129.99</p>
-        </div>
-      </div>
--->
+
+
 {%endblock%}
 
 
