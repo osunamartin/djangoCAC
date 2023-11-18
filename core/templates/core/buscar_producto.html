@@ -1,14 +1,26 @@
 {%extends "core/base.html"%}
+{% load static %}
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'core/css/producto_lista.css' %}">
+{%endblock%}
 
 {%block section_title%} Búsqueda de Productos {%endblock%}
+
+
+
 {%block content%}
     
       {% if buscado %}
             <h2> Resultados para: {{ buscado }} </h2>
-            <br/>
+            <form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
+							{%csrf_token%}
+							<input type="search" name="buscado" placeholder="Buscar Producto"> 
+							<button type="submit">Buscar</button>
+            </form>
+            
             {% for producto in productos %}
                   <div class="contenedor-producto">
-                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
                         <h2>{{ producto.nombre }}</h2>
                         <p>Precio: ${{ producto.precio }}</p>
                         {% if producto.stock > 0 %}

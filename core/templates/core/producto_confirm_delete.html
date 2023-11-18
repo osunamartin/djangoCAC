@@ -1,0 +1,17 @@
+<!-- Para ver qué onda lo de borrar productos, indagar -->
+
+{%extends "core/base.html"%}
+
+{%block section_title%} Borrar producto {%endblock%}
+{%block content%}
+
+<form action="" method="post">
+  
+  {% csrf_token %}
+  
+  <p>¿Estás seguro que quieres eliminar "{{ producto.nombre }}"?</p>
+   
+  <input type="submit" value="Confirmar">
+</form>
+
+{%endblock%}

@@ -12,7 +12,7 @@
     <a style="color:blue" href="{% url 'producto_alta' %}">Dar de alta un nuevo producto</a>
     <br>
   {% endif %}
-  <h1>Lista de Productos</h1>
+  <h2>Lista de Productos</h2>
 
   <form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
     {%csrf_token%}
@@ -27,12 +27,15 @@
       <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
       <h2>{{ producto.nombre }}</h2>
       <p>Precio: ${{ producto.precio }}</p>
+      
       {% if producto.stock > 0 %}
           <p style="color: green;">Stock Disponible</p>
         {% else %}
           <p style="color: red;">No hay stock</p>
       {% endif %}
-        
+      
+
+      
       
     </div>
   {% endfor %}
