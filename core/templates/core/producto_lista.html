@@ -34,8 +34,14 @@
           <p style="color: red;">No hay stock</p>
       {% endif %}
       
-
       
+        {%if request.user.is_staff%}
+
+          <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
+          <a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
+          
+
+        {%endif%}
       
     </div>
   {% endfor %}

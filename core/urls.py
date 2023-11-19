@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import ProductoListView, ProductoCreateView #ProductoDeleteView
+from .views import ProductoListView, ProductoCreateView, ProductoDeleteView, ProductoUpdateView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -15,7 +15,9 @@ urlpatterns = [
     path('producto/lista', ProductoListView.as_view(), name='producto_lista'),
     path('producto/wishlist', views.WishlistListView.as_view(), name="wishlist"),
     path('producto/buscar_producto', views.buscar_producto, name="buscar_producto"),
-    #path('producto/delete/<int:pk>', ProductoDeleteView.as_view(), name="eliminar_producto") 
+    path('producto/delete/<int:pk>', ProductoDeleteView.as_view(), name="producto_borrar"),
+    path('producto/update/<int:pk>', ProductoUpdateView.as_view(), name="producto_editar")  
+
 ]   
 
 if settings.DEBUG:

@@ -1,0 +1,16 @@
+<!-- Para ver qué onda lo de borrar productos, indagar -->
+
+{%extends "core/base.html"%}
+
+{%block section_title%} Borrar producto {%endblock%}
+{%block content%}
+
+  <form method="post">{% csrf_token %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Editar">
+    
+  </form>
+  
+
+{%endblock%}

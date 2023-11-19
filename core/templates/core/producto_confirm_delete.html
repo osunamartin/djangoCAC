@@ -6,12 +6,9 @@
 {%block content%}
 
 <form action="" method="post">
-  
   {% csrf_token %}
+  <p>¿Estás seguro de que quieres borrar "{{ producto.nombre }}"?</p>
+  <input type="submit" value="Sí, borrar el producto" />
   
-  <p>¿Estás seguro que quieres eliminar "{{ producto.nombre }}"?</p>
-   
-  <input type="submit" value="Confirmar">
-</form>
 
 {%endblock%}

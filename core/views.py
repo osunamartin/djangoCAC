@@ -9,7 +9,7 @@ from datetime import datetime
 from .forms import ContactoForm, ProductoAltaForm
 from .models import Persona, Producto, Wishlist
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView
 
 
@@ -105,10 +105,14 @@ def buscar_producto(request):
   else:
     return render(request, "core/buscar_producto.html")
   
-'''class ProductoDeleteView(DeleteView):
+class ProductoDeleteView(DeleteView):
   model = Producto
-  success_url = reverse_lazy("producto_lista")'''
-     
+  success_url = reverse_lazy("producto_lista")
+
+class ProductoUpdateView(UpdateView):
+  model = Producto 
+  fields = ['nombre', 'precio', 'stock', 'imagen']
+  success_url = reverse_lazy("producto_lista")
 
 
 
