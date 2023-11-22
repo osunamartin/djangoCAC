@@ -7,10 +7,13 @@ from django.contrib.auth.decorators import login_required, permission_required
 #from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
 from .forms import ContactoForm, ProductoAltaForm
+from rest_framework import viewsets
+from .serializers import ProductoSerializer
 from .models import Persona, Producto, Wishlist
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView 
+
 
 
 # ---------------------------------------------------- #
@@ -118,46 +121,11 @@ class ProductoUpdateView(UpdateView):
 
 # ---------------------------------------------------------------------------------- #
 
+class ProductoViewSet(viewsets.ModelViewSet):
+   queryset = Producto.objects.all()
+   serializer_class = ProductoSerializer
 
-
-
-'''
-/* Estilo para la lista 
-  /* ul {
-      list-style: none;
-      padding: 0;
-    }
-    
-    /* Estilo para cada ítem de la lista */
-    ul li {
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-    
-    /* Estilo para la imagen */
-    ul li img {
-      display: block;
-      width: 100px;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    
-    /* Estilo para el nombre del producto */
-    ul li h2 {
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-    
-    /* Estilo para el precio */
-    ul li p {
-      font-size: 14px;
-      color: #888;
-    } 
-
-'''
-
-
+   
 
 
 

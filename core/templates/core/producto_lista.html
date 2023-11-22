@@ -36,10 +36,10 @@
       
       
         {%if request.user.is_staff%}
-
-          <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
-          <a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
-          
+          <div class="delete-edit">
+            <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
+            <a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
+          </div>
 
         {%endif%}
       
