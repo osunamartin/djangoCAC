@@ -34,15 +34,17 @@
           <p style="color: red;">No hay stock</p>
       {% endif %}
       
-      
-        {%if request.user.is_staff%}
-          <div class="delete-edit">
-            <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
-            <a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
-          </div>
+      {%if request.user.is_staff%}
+        <div class="delete-edit">
+          <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
+          <a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
+        </div>
 
-        {%endif%}
-      
+      {%endif%}
+
+      <br>
+      <a href="{% url 'detalle_producto' producto.id %}" style="color: blue">Ver detalles</a>
+
     </div>
   {% endfor %}
 
