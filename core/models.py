@@ -26,7 +26,7 @@ class Producto (models.Model):
     descripcion = models.CharField(max_length=200,null=True, verbose_name="descripcion del producto")
     stock = models.IntegerField(verbose_name="stock")
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='productos/', null=True, verbose_name="Imagen del producto")
+    imagen = models.ImageField(upload_to='productos/',blank=True, null=True, verbose_name="Imagen del producto")
 
     def __str__(self):
         return self.nombre
