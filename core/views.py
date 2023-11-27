@@ -1,6 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.utils.decorators import method_decorator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
@@ -10,6 +10,7 @@ from .forms import ContactoForm, ProductoAltaForm
 from rest_framework import viewsets
 from .serializers import ProductoSerializer
 from .models import Persona, Producto, Wishlist
+from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView 
@@ -51,6 +52,7 @@ def contacto(request):
       nueva_persona = Persona(
         nombre = formulario.cleaned_data['nombre'],
         apellido = formulario.cleaned_data['apellido'],
+        telefono = formulario.cleaned_data['telefono'],
         email = formulario.cleaned_data['email'],
         mensaje = formulario.cleaned_data['mensaje']
       )
@@ -117,6 +119,16 @@ class ProductoUpdateView(UpdateView):
   fields = ['nombre', 'precio', 'stock', 'imagen']
   success_url = reverse_lazy("producto_lista")
 
+def detalle_producto(request, producto_id):
+    try:
+        producto = get_object_or_404(Producto, pk=producto_id)
+        context = {
+            'producto': producto
+            # Agrega aquí cualquier otro contexto necesario para tu template
+        }
+        return render(request, 'core/detalle_producto.html', context)
+    except Producto.DoesNotExist:
+        raise Http404("El producto no existe")
 
 
 # ---------------------------------------------------------------------------------- #

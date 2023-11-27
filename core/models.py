@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 class Persona(models.Model):
     persona = models.CharField(max_length=30, verbose_name="Nombre de la persona")
     apellido = models.CharField(max_length=30, verbose_name="Apellido")
+    telefono = models.IntegerField(verbose_name='Telefono', default=0)
     email = models.EmailField(max_length=40, verbose_name="Email")
+    mensaje = models.CharField(max_length=250, verbose_name='Mensaje', default='ninguno')
 
 
 class Proveedor(models.Model):

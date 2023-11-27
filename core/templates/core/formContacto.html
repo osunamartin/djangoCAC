@@ -14,8 +14,79 @@
 
 <form action="{% url 'contacto' %}" method="post">
     {% csrf_token %}
-    {{ contacto_form }}
+    <div>
+        <label for="id_nombre">Nombre:</label>
+        <span id="error-nombre" style="color: red;"></span><br>
+        {{ contacto_form.nombre }}
+    </div>
+    <div>
+        <label for="id_apellido">Apellido:</label>
+        <span id="error-apellido" style="color: red;"></span><br>
+        {{ contacto_form.apellido }}
+    </div>
+    <div>
+        <label for="id_email">Email:</label>
+        <span id="error-email" style="color: red;"></span><br>
+        {{ contacto_form.email }}
+    </div>
+    <div>
+        <label for="id_telefono">Teléfono:</label>
+        <span id="error-telefono" style="color: red;"></span><br>
+        {{ contacto_form.telefono }}
+    </div>
+    <div>
+        <label for="id_mensaje">Mensaje:</label>
+        <span id="error-mensaje" style="color: red;"></span><br>
+        {{ contacto_form.mensaje }}
+    </div>
+
     <input type="submit" value="Enviar">
 </form>
-        
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const telefono = document.getElementById('id_telefono').value;
+        const nombre = document.getElementById('id_nombre').value;
+        const apellido = document.getElementById('id_apellido').value;
+        const email = document.getElementById('id_email').value;
+
+        const errorTelefono = document.getElementById('error-telefono');
+        const errorNombre = document.getElementById('error-nombre');
+        const errorApellido = document.getElementById('error-apellido');
+        const errorEmail = document.getElementById('error-email');
+        const errorMensaje = document.getElementById('error-mensaje');
+
+        let error = false;
+
+        errorTelefono.textContent = '';
+        errorNombre.textContent = '';
+        errorApellido.textContent = '';
+        errorEmail.textContent = '';
+        errorMensaje.textContent = '';
+
+        if (!/^\d+$/.test(telefono)) {
+            errorTelefono.textContent = 'El teléfono debe contener solo números.';
+            error = true;
+        }
+
+        if (!/^[a-zA-Z]+$/.test(nombre)) {
+            errorNombre.textContent = 'El nombre no debe contener números ni caracteres especiales.';
+            error = true;
+        }
+
+        if (!/^[a-zA-Z]+$/.test(apellido)) {
+            errorApellido.textContent = 'El apellido no debe contener números ni caracteres especiales.';
+            error = true;
+        }
+
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            errorEmail.textContent = 'Ingrese un correo electrónico válido.';
+            error = true;
+        }
+
+        if (error) {
+            event.preventDefault();
+        }
+    });
+</script>
 {%endblock%}

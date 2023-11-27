@@ -18,9 +18,13 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'C:\\Users\\marti\\OneDrive\\Documentos\\CodoACodo - Django\\TP\\gameShop\\media'
+MEDIA_ROOT = 'C:\\Users\\leand\\OneDrive\\Cursos\\Codo a Codo\\2do Cuatrimestre\\gameshop-main3\\djangoCAC\\media'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = 'C:\\Users\\marti\\OneDrive\\Documentos\\CodoACodo - Django\\TP\\gameShop\\media'
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -61,7 +65,9 @@ ROOT_URLCONF = 'gameShop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'djangoCAC', 'core', 'templates'),  # Ajusta esta línea
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gameshop',
         'USER': 'postgres',
-        'PASSWORD': '1123',
+        'PASSWORD': '4812857a',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
