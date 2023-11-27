@@ -9,7 +9,7 @@ from datetime import datetime
 from .forms import ContactoForm, ProductoAltaForm
 from rest_framework import viewsets
 from .serializers import ProductoSerializer
-from .models import Persona, Producto, Wishlist
+from .models import Persona, Producto, Wishlist, Categoria_Producto
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -87,6 +87,18 @@ class ProductoCreateView(CreateView):
     form_class = ProductoAltaForm
     success_url = reverse_lazy("producto_lista")
 
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+
+        # Obtén las categorías seleccionadas del formulario
+        categorias = form.cleaned_data['categoria_producto']
+
+        # Agrega cada categoría al producto
+        for categoria in categorias:
+            Categoria_Producto.objects.create(producto=self.object, categoria=categoria)
+
+        return super().form_valid(form)
 
 class ProductoListView(ListView):
     model = Producto

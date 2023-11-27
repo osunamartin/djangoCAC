@@ -39,13 +39,17 @@ class ProductoAltaForm(forms.ModelForm):
         model = Producto
         fields = '__all__'
 
-    categoria = forms.ModelMultipleChoiceField(
-        queryset=Categoria.objects.all(),
-        widget=forms.CheckboxSelectMultiple,  # Esto permite la selección múltiple
-        label="Categoría(s) del producto"
-    )
     
     proveedor = forms.ModelChoiceField(queryset=Proveedor.objects.all(), label="Proveedor del producto")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['categoria_producto'] = forms.ModelMultipleChoiceField(
+            queryset=Categoria.objects.all(),
+            widget=forms.CheckboxSelectMultiple,  
+            label="Categoría(s) del producto",
+            required=False
+        )
 
     def clean_precio(self):
         if self.cleaned_data["precio"] < 0:
