@@ -10,29 +10,33 @@
 
 {%block content%}
     
-      {% if buscado %}
-            <h2> Resultados para: {{ buscado }} </h2>
-            <form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
-							{%csrf_token%}
-							<input type="search" name="buscado" placeholder="Buscar Producto"> 
-							<button type="submit">Buscar</button>
-            </form>
-            
-            {% for producto in productos %}
-                  <div class="contenedor-producto">
-                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
-                        <h2>{{ producto.nombre }}</h2>
-                        <p>Precio: ${{ producto.precio }}</p>
-                        {% if producto.stock > 0 %}
-                              <p style="color: green;">Stock Disponible</p>
-                        {% else %}
-                              <p style="color: red;">No hay stock</p>
-                        {% endif %}
-                  </div>
-            {% endfor %}
+{% if buscado %}
+	<h2> Resultados para: {{ buscado }} </h2>
+	<form action="{%url 'buscar_producto'%}" class="d-flex" method="POST">
+		{%csrf_token%}
+		<input type="search" name="buscado" placeholder="Buscar Producto"> 
+		<button type="submit">Buscar</button>
+	</form>
+	
+	{% for producto in productos %}
+		<div class="contenedor-producto">
+			<img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+			<h2>{{ producto.nombre }}</h2>
+			<p>Precio: ${{ producto.precio }}</p>
+			{% if producto.stock > 0 %}
+						<p style="color: green;">Stock Disponible</p>
+			{% else %}
+						<p style="color: red;">No hay stock</p>
+			{% endif %}
+			<div class="delete-edit">
+				<a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
+				<a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
+			</div>	
+		</div>
+	{% endfor %}
 
-      {% else %}
-            <h2>Ups, no buscaste ningún producto.</h2>      
-      {% endif %}
+{% else %}
+	<h2>Ups, no buscaste ningún producto.</h2>      
+{% endif %}
 
 {%endblock%}
