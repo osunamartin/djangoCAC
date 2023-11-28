@@ -87,8 +87,6 @@ class ProductoAltaForm(forms.ModelForm):
 
 
 
-
-
 # class ProductoAltaForm(forms.Form):
 #     producto = forms.CharField(label="nombre del Producto",required=True)
 #     precio = forms.IntegerField(label="precio del producto",required=True)

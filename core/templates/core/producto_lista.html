@@ -22,6 +22,13 @@
  
   {% for producto in productos %}
     <div class="contenedor-producto">
+
+      {%if request.user.is_staff%}
+        <div class="delete-edit">
+          <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar </a>
+          <a href="{% url 'producto_editar' producto.id %}" style="color: blue;"> Editar</a>
+        </div>
+      {%endif%}
       
         
       <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
@@ -33,18 +40,16 @@
         {% else %}
           <p style="color: red;">No hay stock</p>
       {% endif %}
-      
-      {%if request.user.is_staff%}
-        <div class="delete-edit">
-          <a href="{% url 'producto_borrar' producto.id %}" style="color: red;">Borrar</a>
-          <a href="{% url 'producto_editar' producto.id %}" style="color: blue;">Editar</a>
-        </div>
-
-      {%endif%}
 
       <br>
       <a href="{% url 'detalle_producto' producto.id %}" style="color: blue">Ver detalles</a>
+      <br>
 
+      {% if user.is_authenticated %}
+
+      <a href="{% url 'agregar_a_wishlist' producto.id %}" style="color: green">Agregar a Wishlist</a>
+
+      {% endif %}
     </div>
   {% endfor %}
 

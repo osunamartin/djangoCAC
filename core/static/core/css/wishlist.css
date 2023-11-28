@@ -1,0 +1,41 @@
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px; /* Espaciado interno para cada producto */
+  }
+  
+  li img {
+    max-width: 100px;
+    margin-right: 20px;
+  }
+  
+  li h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  li p {
+    margin: 5px 0;
+    color: #888;
+  }
+
+  /* Estilo para el contenedor de la lista de deseos */
+  ul {
+    list-style: none;
+    padding: 0;
+    border: 1px solid #ccc;
+  }
+  
+  /* Estilo para el mensaje si la lista de deseos está vacía */
+  p.empty-message {
+    font-style: italic;
+    color: #555;
+  }
+  
+  /* Estilo para el contenedor del precio total */
+  .total-price {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 20px;
+  }

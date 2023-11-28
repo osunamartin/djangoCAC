@@ -1,19 +1,18 @@
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
-#from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
 from .forms import ContactoForm, ProductoAltaForm
 from rest_framework import viewsets
 from .serializers import ProductoSerializer
-from .models import Persona, Producto, Wishlist, Categoria_Producto
-from django.views.generic import DetailView
+from .models import *
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView 
+from django.db.models import Sum
 
 
 
@@ -149,11 +148,43 @@ class ProductoViewSet(viewsets.ModelViewSet):
    queryset = Producto.objects.all()
    serializer_class = ProductoSerializer
 
-   
+# ------------------------------------------------------------------------------------------------------------------ #
 
+def wishlist(request):
+    usuario_actual = request.user
+    wishlist_productos = Wishlist.objects.filter(usuario=usuario_actual)
+    
+    # Calcular el precio total de los productos en la wishlist
+    precio_total = wishlist_productos.aggregate(total=Sum('productos__precio'))['total']
+    
+    context = {
+        'wishlist_productos': wishlist_productos,
+        'precio_total': precio_total if precio_total else 0  # Manejar el caso de que no haya productos
+    }
+    
+    return render(request, 'core/wishlist.html', context)
 
+def agregar_a_wishlist(request, producto_id):
+    producto = get_object_or_404(Producto, pk=producto_id)
+    usuario_actual = request.user
 
+    wishlist, created = Wishlist.objects.get_or_create(usuario=usuario_actual)
 
+    if producto not in wishlist.productos.all():
+        wishlist.productos.add(producto)
+        wishlist.save()
+
+    return redirect('wishlist')
+
+def eliminar_producto_wishlist(request, producto_id):
+    usuario_actual = request.user
+    wishlist = Wishlist.objects.get(usuario=usuario_actual)
+    producto_a_eliminar = Producto.objects.get(pk=producto_id)
+    
+    if producto_a_eliminar in wishlist.productos.all():
+        wishlist.productos.remove(producto_a_eliminar)
+    
+    return redirect('wishlist')
 
 
 

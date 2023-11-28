@@ -1,10 +1,38 @@
-{%extends "core/base.html"%}
+{% extends "core/base.html" %}
+{% load static %}
 
-{%block section_title%} Wishlist {%endblock%}
-{%block content%}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/css/wishlist.css' %}">
+{% endblock %}
 
-    <section id="nosotros">
-      <h3>Bienvenido a tu lista de productos deseados <b>{{user.username}}</b></h3>
-    </section>   
+{% block section_title %} Wishlist {% endblock %}
+{% block content %}
 
-{%endblock%}
+{% if wishlist_productos %}
+    <h2>Productos en tu lista de deseos:</h2>
+    <ul>
+        {% for wishlist_item in wishlist_productos %}
+            {% for producto in wishlist_item.productos.all %}
+                <li>
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    <div>
+                        <h2>{{ producto.nombre }}</h2>
+                        <p>Precio: ${{ producto.precio }}</p>
+                        <form method="POST" action="{% url 'eliminar_producto_wishlist' producto.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    <div class="total-price">
+        <p>Precio total de la wishlist: ${{ precio_total }}</p>
+    </div>
+{% else %}
+    <p class="empty-message">Todavía no has agregado productos a tu lista de deseos.</p>
+{% endif %}
+
+{% endblock %}

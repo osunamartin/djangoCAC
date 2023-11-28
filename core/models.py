@@ -44,15 +44,11 @@ class Categoria(models.Model):
 class Categoria_Producto (models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-       
+
 
 class Wishlist(models.Model):
-    persona = models.ForeignKey(Persona, on_delete=models.CASCADE) #a qué persona está asociada la lista de deseados
-
-
-    
-
-
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    productos = models.ManyToManyField(Producto)
 
 
 
