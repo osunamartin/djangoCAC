@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Producto, Categoria, Proveedor
+from .models import *
 
 # --------------------------------------------------------------------------------------------------------- #
 
@@ -59,7 +59,10 @@ class ProductoAltaForm(forms.ModelForm):
  
 # --------------------------------------------------------------------------------------------------------- #
 
-
+class EnvioForm(forms.ModelForm):
+    class Meta:
+        model = Envio
+        fields = '__all__'
 
 
 

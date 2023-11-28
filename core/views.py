@@ -5,7 +5,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from datetime import datetime
-from .forms import ContactoForm, ProductoAltaForm
+from .forms import *
 from rest_framework import viewsets
 from .serializers import ProductoSerializer
 from .models import *
@@ -13,6 +13,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView 
 from django.db.models import Sum
+from django.views.generic import TemplateView
 
 
 
@@ -37,7 +38,7 @@ class CustomLoginView(LoginView):
         context['message'] = 'Inicio de sesión requerido'
         return context
 
-# ---------------------------------------------------- #
+# -------------------- Contacto -------------------------------- #
 
 def contacto(request):
 
@@ -69,7 +70,7 @@ def contacto(request):
   
   return render(request, 'core/formContacto.html', context)
 
-# -------------------------------------------------------------------------------- #
+# ------------------------------------- Nosotros ------------------------------------------- #
 
 def quienesSomos(request):
 
@@ -99,17 +100,11 @@ class ProductoCreateView(CreateView):
 
         return super().form_valid(form)
 
+
 class ProductoListView(ListView):
     model = Producto
     template_name = 'core/producto_lista.html'
     context_object_name = 'productos'
-    
-
-@method_decorator(login_required, name='dispatch')
-class WishlistListView(ListView):
-    model = Wishlist
-    template_name = 'core/wishlist.html' 
-    context_object_name = 'wishlist'
     
 
 def buscar_producto(request):
@@ -121,14 +116,17 @@ def buscar_producto(request):
   else:
     return render(request, "core/buscar_producto.html")
   
+
 class ProductoDeleteView(DeleteView):
   model = Producto
   success_url = reverse_lazy("producto_lista")
+
 
 class ProductoUpdateView(UpdateView):
   model = Producto 
   fields = ['nombre', 'precio', 'stock', 'imagen']
   success_url = reverse_lazy("producto_lista")
+
 
 def detalle_producto(request, producto_id):
     try:
@@ -150,6 +148,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
 
 # ------------------------------------------------------------------------------------------------------------------ #
 
+@login_required
 def wishlist(request):
     usuario_actual = request.user
     wishlist_productos = Wishlist.objects.filter(usuario=usuario_actual)
@@ -164,6 +163,8 @@ def wishlist(request):
     
     return render(request, 'core/wishlist.html', context)
 
+
+@login_required
 def agregar_a_wishlist(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
     usuario_actual = request.user
@@ -176,6 +177,8 @@ def agregar_a_wishlist(request, producto_id):
 
     return redirect('wishlist')
 
+
+@login_required
 def eliminar_producto_wishlist(request, producto_id):
     usuario_actual = request.user
     wishlist = Wishlist.objects.get(usuario=usuario_actual)
@@ -187,11 +190,65 @@ def eliminar_producto_wishlist(request, producto_id):
     return redirect('wishlist')
 
 
+class EnvioCreateView(CreateView):
+    model = Envio
+    form_class = EnvioForm
+    template_name = 'core/formulario_envio.html'
+    success_url = reverse_lazy("confirmacion_pedido")
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+class ConfirmacionPedidoView(TemplateView):
+    template_name = 'core/confirmacion_pedido.html'
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @method_decorator(login_required, name='dispatch')
+# class WishlistListView(ListView):
+#     model = Wishlist
+#     template_name = 'core/wishlist.html' 
+#     context_object_name = 'wishlist'
 
 
 # def producto_lista(request):

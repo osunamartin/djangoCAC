@@ -31,6 +31,11 @@
     <div class="total-price">
         <p>Precio total de la wishlist: ${{ precio_total }}</p>
     </div>
+
+    <br>
+    <a href="{% url 'enviar_pedido' %}" style="color: blue;" class="confirm-button">Confirmar y proceder al envío</a>
+
+    
 {% else %}
     <p class="empty-message">Todavía no has agregado productos a tu lista de deseos.</p>
 {% endif %}

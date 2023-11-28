@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-from .views import ProductoListView, ProductoCreateView, ProductoDeleteView, ProductoUpdateView
+from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -19,13 +19,14 @@ urlpatterns = [
     path('producto/alta', views.ProductoCreateView.as_view(), name="producto_alta"),
     path('producto/lista', ProductoListView.as_view(), name='producto_lista'),
     path('producto/<int:producto_id>/', views.detalle_producto, name='detalle_producto'),
-    #path('producto/wishlist', views.WishlistListView.as_view(), name="wishlist"),
-    path('wishlist/', views.wishlist, name='wishlist'),
-    path('agregar_wishlist/<int:producto_id>/', views.agregar_a_wishlist, name='agregar_a_wishlist'),
-    path('eliminar_producto_wishlist/<int:producto_id>/', views.eliminar_producto_wishlist, name='eliminar_producto_wishlist'),
     path('producto/buscar_producto', views.buscar_producto, name="buscar_producto"),
     path('producto/delete/<int:pk>', ProductoDeleteView.as_view(), name="producto_borrar"),
     path('producto/update/<int:pk>', ProductoUpdateView.as_view(), name="producto_editar"),
+    path('producto/wishlist/', views.wishlist, name='wishlist'),
+    path('producto/agregar_wishlist/<int:producto_id>/', views.agregar_a_wishlist, name='agregar_a_wishlist'),
+    path('producto/eliminar_producto_wishlist/<int:producto_id>/', views.eliminar_producto_wishlist, name='eliminar_producto_wishlist'),
+    path('producto/enviar_pedido/', EnvioCreateView.as_view(), name='enviar_pedido'),
+    path('producto/confirmacion_pedido/', ConfirmacionPedidoView.as_view(), name='confirmacion_pedido'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 

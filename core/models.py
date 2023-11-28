@@ -51,4 +51,42 @@ class Wishlist(models.Model):
     productos = models.ManyToManyField(Producto)
 
 
+class Envio(models.Model):
+    nombre_completo = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=15)
+    email = models.EmailField()
+    pais = models.CharField(max_length=50)
+    provincia = models.CharField(max_length=50)
+    ciudad = models.CharField(max_length=50)
+    codigo_postal = models.CharField(max_length=10)
+    direccion_entrega = models.CharField(max_length=255)
+    notas_pedido = models.TextField(blank=True)
+
+    OPCIONES_ENVIO = [
+        ('tienda', 'Retiro en tienda'),
+        ('domicilio', 'Envío a domicilio'),
+    ]
+
+    OPCIONES_PAGO = [
+        ('transferencia', 'Transferencia'),
+        ('mercadopago', 'MercadoPago'),
+        ('efectivo', 'Efectivo'),
+    ]
+
+    tipo_envio = models.CharField(
+        max_length=10,
+        choices=OPCIONES_ENVIO,
+        default='tienda',
+    )
+
+    metodo_pago = models.CharField(
+        max_length=15,
+        choices=OPCIONES_PAGO,
+        default='transferencia',
+    )
+
+    def __str__(self):
+        return f"Pedido de {self.nombre_completo}"
+
+
 
