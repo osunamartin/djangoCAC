@@ -49,7 +49,7 @@ class Categoria_Producto (models.Model):
         return f"{self.producto.nombre} - {self.categoria.categoria}"
 
 
-class Wishlist(models.Model):
+class Carrito(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     productos = models.ManyToManyField(Producto)
 

@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # --------------------------------------------------------------------------------------------------------- #
 
@@ -64,8 +66,12 @@ class EnvioForm(forms.ModelForm):
         model = Envio
         fields = '__all__'
 
+class RegisterForm(UserCreationForm):
+    email = models.EmailField()
 
-
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 
 

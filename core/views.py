@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import UserCreationForm
 from datetime import datetime
 from .forms import *
 from rest_framework import viewsets
@@ -69,6 +70,20 @@ def contacto(request):
   }
   
   return render(request, 'core/formContacto.html', context)
+
+# --------------------------------- Registro de usuarios-------------------------------------#
+
+def register(response):
+   if response.method == "POST":
+      form = RegisterForm(response.POST)
+      if form.is_valid():
+         form.save()
+      
+      return redirect('/game_shop/')
+   else:
+    form = RegisterForm()
+   
+   return render(response, 'core/register.html', {'form':form})
 
 # ------------------------------------- Nosotros ------------------------------------------- #
 
@@ -158,48 +173,48 @@ class ProductoViewSet(viewsets.ModelViewSet):
    queryset = Producto.objects.all()
    serializer_class = ProductoSerializer
 
-# ----------------------------------------------- Wishlist ------------------------------------------------------------------- #
+# ----------------------------------------------- carrito ------------------------------------------------------------------- #
 
 @login_required
-def wishlist(request):
+def carrito(request):
     usuario_actual = request.user
-    wishlist_productos = Wishlist.objects.filter(usuario=usuario_actual)
+    carrito_productos = Carrito.objects.filter(usuario=usuario_actual)
     
-    # Calcular el precio total de los productos en la wishlist
-    precio_total = wishlist_productos.aggregate(total=Sum('productos__precio'))['total']
+    # Calcular el precio total de los productos en la carrito
+    precio_total = carrito_productos.aggregate(total=Sum('productos__precio'))['total']
     
     context = {
-        'wishlist_productos': wishlist_productos,
+        'carrito_productos': carrito_productos,
         'precio_total': precio_total if precio_total else 0  # Manejar el caso de que no haya productos
     }
     
-    return render(request, 'core/wishlist.html', context)
+    return render(request, 'core/carrito.html', context)
 
 
 @login_required
-def agregar_a_wishlist(request, producto_id):
+def agregar_a_carrito(request, producto_id):
     producto = get_object_or_404(Producto, pk=producto_id)
     usuario_actual = request.user
 
-    wishlist, created = Wishlist.objects.get_or_create(usuario=usuario_actual)
+    carrito, created = Carrito.objects.get_or_create(usuario=usuario_actual)
 
-    if producto not in wishlist.productos.all():
-        wishlist.productos.add(producto)
-        wishlist.save()
+    if producto not in carrito.productos.all():
+        carrito.productos.add(producto)
+        carrito.save()
 
-    return redirect('wishlist')
+    return redirect('carrito')
 
 
 @login_required
-def eliminar_producto_wishlist(request, producto_id):
+def eliminar_producto_carrito(request, producto_id):
     usuario_actual = request.user
-    wishlist = Wishlist.objects.get(usuario=usuario_actual)
+    carrito = Carrito.objects.get(usuario=usuario_actual)
     producto_a_eliminar = Producto.objects.get(pk=producto_id)
     
-    if producto_a_eliminar in wishlist.productos.all():
-        wishlist.productos.remove(producto_a_eliminar)
+    if producto_a_eliminar in carrito.productos.all():
+        carrito.productos.remove(producto_a_eliminar)
     
-    return redirect('wishlist')
+    return redirect('carrito')
 
 # --------------------------------------------- Proceso compra --------------------------------------------------------------------- #
 
@@ -247,10 +262,10 @@ class ConfirmacionPedidoView(TemplateView):
 
 
 # @method_decorator(login_required, name='dispatch')
-# class WishlistListView(ListView):
-#     model = Wishlist
-#     template_name = 'core/wishlist.html' 
-#     context_object_name = 'wishlist'
+# class carritoListView(ListView):
+#     model = carrito
+#     template_name = 'core/carrito.html' 
+#     context_object_name = 'carrito'
 
 
 # def producto_lista(request):

@@ -24,7 +24,7 @@ sitio_admin.register(Proveedor)
 sitio_admin.register(Producto)
 sitio_admin.register(Categoria)
 #sitio_admin.register(Categoria_Producto)
-sitio_admin.register(Wishlist)
+sitio_admin.register(Carrito)
 """
 
 # ------------------------------------------------------------------------------------------ #
@@ -86,7 +86,7 @@ class ProductoAdmin(admin.ModelAdmin):
 
 # ----------------------------------------------------------------------------------------------------------------- #
 
-class WishListAdminForm(forms.ModelForm):
+class CarritoAdminForm(forms.ModelForm):
     productos = forms.ModelMultipleChoiceField(
         queryset=Producto.objects.all(),
         widget=FilteredSelectMultiple('Productos', is_stacked=False),
@@ -94,9 +94,9 @@ class WishListAdminForm(forms.ModelForm):
         label='Productos'
     )
 
-@admin.register(Wishlist)
-class WhishListAdmin(admin.ModelAdmin):
-    form = WishListAdminForm
+@admin.register(Carrito)
+class CarritoAdmin(admin.ModelAdmin):
+    form = CarritoAdminForm
 
 # ----------------------------------------------------------------------------------------------------------------- #
 

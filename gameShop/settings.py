@@ -19,8 +19,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'C:\\Users\\leand\\OneDrive\\Cursos\\Codo a Codo\\2do Cuatrimestre\\gameshop-main3\\djangoCAC\\media'
-
+#MEDIA_ROOT = 'C:\\Users\\leand\\OneDrive\\Cursos\\Codo a Codo\\2do Cuatrimestre\\gameshop-main3\\djangoCAC\\media'
+MEDIA_ROOT = 'C:\\Users\\marti\\OneDrive\\Documentos\\CodoACodo - Django\\TP\\gameShop\\media\\'
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = 'C:\\Users\\marti\\OneDrive\\Documentos\\CodoACodo - Django\\TP\\gameShop\\media'
 
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gameshop',
         'USER': 'postgres',
-        'PASSWORD': '4812857a',
+        'PASSWORD': '1123',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
