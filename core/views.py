@@ -28,7 +28,7 @@ def index(request):
 
   return render(request, "core/index.html", context)
 
-# ---------------------------------------------------- #
+# -------------------- Login -------------------------------- #
 
 class CustomLoginView(LoginView):
     template_name = 'core/login.html'
@@ -117,7 +117,6 @@ class ProductoListView(ListView):
     context = super().get_context_data(**kwargs)
     context['categorias'] = Categoria.objects.all()  # Obtener todas las categorías
     return context
-  
 
     
 def buscar_producto(request):
@@ -159,7 +158,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
    queryset = Producto.objects.all()
    serializer_class = ProductoSerializer
 
-# ------------------------------------------------------------------------------------------------------------------ #
+# ----------------------------------------------- Wishlist ------------------------------------------------------------------- #
 
 @login_required
 def wishlist(request):
@@ -202,6 +201,7 @@ def eliminar_producto_wishlist(request, producto_id):
     
     return redirect('wishlist')
 
+# --------------------------------------------- Proceso compra --------------------------------------------------------------------- #
 
 class EnvioCreateView(CreateView):
     model = Envio

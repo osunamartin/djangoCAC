@@ -9,34 +9,34 @@
 {% block content %}
 
 {% if wishlist_productos %}
-    <h2>Productos en tu lista de deseos:</h2>
-    <ul>
-        {% for wishlist_item in wishlist_productos %}
-            {% for producto in wishlist_item.productos.all %}
-                <li>
-                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
-                    <div>
-                        <h2>{{ producto.nombre }}</h2>
-                        <p>Precio: ${{ producto.precio }}</p>
-                        <form method="POST" action="{% url 'eliminar_producto_wishlist' producto.id %}">
-                            {% csrf_token %}
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </div>
-                </li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
+  <h2>Productos en tu lista de deseos:</h2>
+  <ul>
+    {% for wishlist_item in wishlist_productos %}
+      {% for producto in wishlist_item.productos.all %}
+        <li>
+          <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+          <div>
+            <h2>{{ producto.nombre }}</h2>
+            <p>Precio: ${{ producto.precio }}</p>
+            <form method="POST" action="{% url 'eliminar_producto_wishlist' producto.id %}">
+              {% csrf_token %}
+              <button type="submit">Eliminar</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    {% endfor %}
+  </ul>
 
-    <div class="total-price">
-        <p>Precio total de la wishlist: ${{ precio_total }}</p>
-    </div>
+  <div class="total-price">
+    <p>Precio total de la wishlist: ${{ precio_total }}</p>
+  </div>
 
-    <br>
-    <a href="{% url 'enviar_pedido' %}" style="color: blue;" class="confirm-button">Confirmar y proceder al envío</a>
+  <br>
+  <a href="{% url 'enviar_pedido' %}" style="color: blue;" class="confirm-button">Confirmar y proceder al envío</a>
 
     
-{% else %}
+  {% else %}
     <p class="empty-message">Todavía no has agregado productos a tu lista de deseos.</p>
 {% endif %}
 

@@ -59,7 +59,6 @@ sitio_admin.register(Wishlist)
 
 # ------------------------------------------------------------------------------------------------------------------------------------------- #
 
-
 class CategoriaAdminForm(forms.ModelForm):
     productos = forms.ModelMultipleChoiceField(
         queryset=Producto.objects.all(),
@@ -81,11 +80,25 @@ class CategoriaAdmin(admin.ModelAdmin):
 @admin.register(Producto)
 class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descripcion', 'proveedor', 'precio', 'stock', 'imagen')
-    list_editable = ('descripcion', 'proveedor', 'stock')
+    list_editable = ('descripcion', 'stock')
     list_display_links = ('nombre',)
     search_fields = ['nombre']
 
+# ----------------------------------------------------------------------------------------------------------------- #
+
+class WishListAdminForm(forms.ModelForm):
+    productos = forms.ModelMultipleChoiceField(
+        queryset=Producto.objects.all(),
+        widget=FilteredSelectMultiple('Productos', is_stacked=False),
+        required=False,
+        label='Productos'
+    )
+
+@admin.register(Wishlist)
+class WhishListAdmin(admin.ModelAdmin):
+    form = WishListAdminForm
+
+# ----------------------------------------------------------------------------------------------------------------- #
 
 admin.site.register(Proveedor)
-admin.site.register(Wishlist)
-#admin.site.register(Categoria_Producto)
+admin.site.register(Categoria_Producto)

@@ -45,10 +45,16 @@ class Categoria_Producto (models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.producto.nombre} - {self.categoria.categoria}"
+
 
 class Wishlist(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     productos = models.ManyToManyField(Producto)
+
+    def __str__(self):
+        return self.usuario.username
 
 
 class Envio(models.Model):
