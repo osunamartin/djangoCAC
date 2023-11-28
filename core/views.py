@@ -102,11 +102,24 @@ class ProductoCreateView(CreateView):
 
 
 class ProductoListView(ListView):
-    model = Producto
-    template_name = 'core/producto_lista.html'
-    context_object_name = 'productos'
-    
+  model = Producto
+  template_name = 'core/producto_lista.html'
+  context_object_name = 'productos'
 
+  def get_queryset(self):
+    categoria_id = self.request.GET.get('categoria')
+    queryset = super().get_queryset()
+    if categoria_id:
+      queryset = queryset.filter(categoria__id=categoria_id)
+    return queryset
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['categorias'] = Categoria.objects.all()  # Obtener todas las categorías
+    return context
+  
+
+    
 def buscar_producto(request):
   if request.method == "POST":
     buscado = request.POST['buscado']
@@ -202,18 +215,7 @@ class EnvioCreateView(CreateView):
 class ConfirmacionPedidoView(TemplateView):
     template_name = 'core/confirmacion_pedido.html'
 
-
-
-
-
-
-
-
-
-
-
-
-
+# ------------------------------------------------------------------------------------------------------------------ #
 
 
 
