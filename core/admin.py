@@ -102,3 +102,27 @@ class CarritoAdmin(admin.ModelAdmin):
 
 admin.site.register(Proveedor)
 admin.site.register(Categoria_Producto)
+
+
+class ProductoInline(admin.TabularInline):
+    model = Envio.productos.through
+    extra = 0
+    readonly_fields = ('producto',)  # Hace que el campo sea de solo lectura
+
+    def has_add_permission(self, request, obj):
+        return False  # Deshabilita la posibilidad de añadir nuevos productos desde el inline
+
+    def has_delete_permission(self, request, obj=None):
+        return False  # Deshabilita la posibilidad de eliminar productos desde el inline
+
+    def has_change_permission(self, request, obj=None):
+        return False  # Deshabilita la posibilidad de cambiar productos desde el inline
+
+@admin.register(Envio)
+class EnvioAdmin(admin.ModelAdmin):
+    inlines = [ProductoInline]
+    list_display = ('nombre_completo', 'telefono', 'email', 'direccion_entrega', 'tipo_envio', 'metodo_pago')
+    list_filter = ('tipo_envio', 'metodo_pago')
+    search_fields = ('nombre_completo', 'email', 'direccion_entrega')
+
+admin.site.register(EnvioProducto)

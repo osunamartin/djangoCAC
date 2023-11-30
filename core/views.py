@@ -13,6 +13,8 @@ from .models import *
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.views.generic import TemplateView
 
@@ -218,15 +220,31 @@ def eliminar_producto_carrito(request, producto_id):
 
 # --------------------------------------------- Proceso compra --------------------------------------------------------------------- #
 
-class EnvioCreateView(CreateView):
+class EnvioCreateView(LoginRequiredMixin, CreateView):
     model = Envio
     form_class = EnvioForm
     template_name = 'core/formulario_envio.html'
     success_url = reverse_lazy("confirmacion_pedido")
 
     def form_valid(self, form):
+        carrito = Carrito.objects.get(usuario=self.request.user)
+
+        # Crear el objeto Envio pero no guardarlo aún
+        self.object = form.save(commit=False)
+        self.object.carrito = carrito
+        self.object.usuario = self.request.user
+
+        # Guardar el objeto Envio en la base de datos
+        self.object.save()
+
+        # Agregar todos los productos del carrito al envío
+        for producto in carrito.productos.all():
+            # Crear y guardar un objeto EnvioProducto para cada producto en el carrito
+            EnvioProducto.objects.create(envio=self.object, producto=producto)
+
         return super().form_valid(form)
     
+
 class ConfirmacionPedidoView(TemplateView):
     template_name = 'core/confirmacion_pedido.html'
 

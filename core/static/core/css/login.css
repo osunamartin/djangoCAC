@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+form {
+    background: #f9f9f9;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 0px #000000;
+}
+
+table {
+    width: 100%;
+}
+
+table td {
+    padding: 10px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+form table td label {
+    display: inline-block;
+    width: 120px; /* Ancho del label */
+    text-align: right;
+    margin-right: 10px; /* Ajuste el margen derecho según sea necesario */
+}
+
+/* Estilo para el campo de entrada */
+form table td input[type="text"],
+form table td input[type="password"] {
+    width: calc(100% - 140px); /* Ancho del campo de entrada */
+    padding: 8px;
+    margin-bottom: 10px; /* Espacio entre cada campo */
+}
+
+/* Estilo para el botón */
+input[type="submit"] {
+    /* ... (estilos del botón) */
+}

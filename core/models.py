@@ -67,6 +67,8 @@ class Envio(models.Model):
     codigo_postal = models.CharField(max_length=10)
     direccion_entrega = models.CharField(max_length=255)
     notas_pedido = models.TextField(blank=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='envios', null=True, blank=True)
+    productos = models.ManyToManyField(Producto, through='EnvioProducto', blank=True)
 
     OPCIONES_ENVIO = [
         ('tienda', 'Retiro en tienda'),
@@ -96,3 +98,9 @@ class Envio(models.Model):
 
 
 
+class EnvioProducto(models.Model):
+    envio = models.ForeignKey(Envio, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.envio.nombre_completo} - {self.producto.nombre}"

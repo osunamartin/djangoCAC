@@ -66,13 +66,37 @@ class EnvioForm(forms.ModelForm):
         model = Envio
         fields = '__all__'
 
+# --------------------------------------------------------------------------------------------------------- #
+
+
 class RegisterForm(UserCreationForm):
-    email = models.EmailField()
+    email = forms.EmailField(label= ('Correo electrónico'))
+    username = forms.CharField(label= ('Nombre de usuario'))
+    password1 = forms.CharField(
+        label= ('Contraseña'),
+        widget=forms.PasswordInput,
+        help_text= ('La contraseña no debe ser demasiado común y debe tener al menos 8 caracteres.'),
+    )
+    password2 = forms.CharField(
+        label= ('Confirmar contraseña'),
+        widget=forms.PasswordInput,
+        help_text= ('Ingresa la misma contraseña para verificar.'),
+    )
+
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
+        help_texts = {
+            'username': "Tu nombre de usuario no debe contener caracteres especiales y debe tener longitud de 150 caracteres como máximo.",
+            'password1': "Tu contraseña debe contener al menos 8 caracteres, no puede ser demasiado común y no puede ser puramente numérica.",
+            'password2': "Ingresa la misma contraseña para verificación.",
+        }
+        error_messages = {
+            'password2': {
+                'password_mismatch': "Las contraseñas no coinciden.",
+            },
+        }
 
 
 

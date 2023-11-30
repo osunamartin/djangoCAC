@@ -1,12 +1,30 @@
-{%extends "core/base.html"%}
+{% extends "core/base.html" %}
+{% load static %}
 
-{%block section_title%} Registro a la web {%endblock%}
-{%block content%}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'core/css/register.css' %}">
+{% endblock %}
+
+{% block section_title %} Registro a la web {% endblock %}
+{% block content %}
   <form method="POST" class="form-group">
-    {%csrf_token%}
-    {{form}}
-    <button type="submit" class="btn btn-success">Registrarse</button>
+    {% csrf_token %}
+    {{ form.username.label_tag }}
+    {{ form.username }}
+    {{ form.username.errors }}
 
+    {{ form.email.label_tag }}
+    {{ form.email }}
+    {{ form.email.errors }}
+
+    {{ form.password1.label_tag }}
+    {{ form.password1 }}
+    {{ form.password1.errors }}
+
+    {{ form.password2.label_tag }}
+    {{ form.password2 }}
+    {{ form.password2.errors }}
+
+    <button type="submit" class="btn btn-success">Registrarse</button>
   </form>
-    
-{%endblock%}
+{% endblock %}

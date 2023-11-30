@@ -2,7 +2,8 @@ li {
     display: inline-block;
     align-items: center;
     margin-bottom: 20px;
-    padding: 15px; /* Espaciado interno para cada producto */
+    border-right: 1px solid rgb(191, 191, 191);
+    padding: 15px;
   }
   
   li img {
