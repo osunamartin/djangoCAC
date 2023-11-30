@@ -39,7 +39,7 @@ class ContactoForm(forms.Form):
 class ProductoAltaForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = '__all__'
+        exclude = ['usuario']
 
     
     proveedor = forms.ModelChoiceField(queryset=Proveedor.objects.all(), label="Proveedor del producto")
@@ -65,6 +65,20 @@ class EnvioForm(forms.ModelForm):
     class Meta:
         model = Envio
         fields = '__all__'
+
+    def __init__(self, usuario_actual=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['usuario'].widget = forms.HiddenInput() 
+
+        if usuario_actual:
+            carrito_usuario = Carrito.objects.get(usuario=usuario_actual)
+            productos_en_carrito = carrito_usuario.productos.all()
+
+            self.fields['productos'].queryset = productos_en_carrito
+
+            # Establecer los productos como inicialmente seleccionados
+            self.initial['productos'] = productos_en_carrito
+        
 
 # --------------------------------------------------------------------------------------------------------- #
 

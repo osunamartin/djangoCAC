@@ -1,12 +1,57 @@
 {%extends "core/base.html"%}
+{% load static %}
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+{%endblock%}
 
 {%block section_title%} Inicio de la web {%endblock%}
 {%block content%}
+<section>
+  <h3>  Bienvenido a nuestra tienda online. Aquí encontrarás todo lo que necesitas en cuanto a PC, consolas y periféricos. <br>
+        Ante cualquier duda, puedes dejarnos tu mensaje en nuestra sección de contacto.
+  </h3>
+</section>   
 
-    <section>
-      <h3>  Bienvenido a nuestra tienda online. Aquí encontrarás todo lo que necesitas en cuanto a PC, consolas y periféricos. <br>
-            Ante cualquier duda, puedes dejarnos tu mensaje en nuestra sección de contacto.
-      </h3>
-    </section>   
+
+<section class="featured-products">
+  <h2>Productos Destacados</h2>
+  <div class="product-list">
+    <!-- Producto 1 -->
+    <div class="product">
+      <img src="../../../media/productos/1050ti.jpg" alt="Producto 1">
+      <h3>GTX 1050 TI</h3>
+      <p>Placa de video GeForce GTX 1050 TI</p>
+      <a href="enlace_a_producto1" class="btn btn-primary">Ver más</a>
+    </div>
+    <!-- Producto 2 -->
+    <div class="product">
+      <img src="../../../media/productos/Mouse-logitech.jpg" alt="Producto 2">
+      <h3>Nombre del Producto 2</h3>
+      <p>Descripción breve del Producto 2.</p>
+      <a href="enlace_a_producto2" class="btn btn-primary">Ver más</a>
+    </div>
+    <!-- Agrega más productos destacados aquí -->
+  </div>
+</section>
+
+<section class="categories">
+  <h2>Categorías Populares</h2>
+  <div class="category-list">
+    <div class="category">
+      <img src="imagen_categoria1.jpg" alt="Categoría 1">
+      <h3>Categoría 1</h3>
+      <a href="enlace_categoria1" class="btn btn-primary">Explorar</a>
+    </div>
+    <div class="category">
+      <img src="imagen_categoria2.jpg" alt="Categoría 2">
+      <h3>Categoría 2</h3>
+      <a href="enlace_categoria2" class="btn btn-primary">Explorar</a>
+    </div>
+    <!-- Agrega más categorías aquí -->
+  </div>
+</section>
 
 {%endblock%}
+
+
+

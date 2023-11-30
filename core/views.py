@@ -226,20 +226,22 @@ class EnvioCreateView(LoginRequiredMixin, CreateView):
     template_name = 'core/formulario_envio.html'
     success_url = reverse_lazy("confirmacion_pedido")
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['usuario_actual'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
+        usuario_actual = self.request.user
         carrito = Carrito.objects.get(usuario=self.request.user)
 
-        # Crear el objeto Envio pero no guardarlo aún
         self.object = form.save(commit=False)
         self.object.carrito = carrito
-        self.object.usuario = self.request.user
+        self.object.usuario = usuario_actual
 
-        # Guardar el objeto Envio en la base de datos
         self.object.save()
 
-        # Agregar todos los productos del carrito al envío
         for producto in carrito.productos.all():
-            # Crear y guardar un objeto EnvioProducto para cada producto en el carrito
             EnvioProducto.objects.create(envio=self.object, producto=producto)
 
         return super().form_valid(form)

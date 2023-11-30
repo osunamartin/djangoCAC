@@ -41,22 +41,3 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-form table td label {
-    display: inline-block;
-    width: 120px; /* Ancho del label */
-    text-align: right;
-    margin-right: 10px; /* Ajuste el margen derecho según sea necesario */
-}
-
-/* Estilo para el campo de entrada */
-form table td input[type="text"],
-form table td input[type="password"] {
-    width: calc(100% - 140px); /* Ancho del campo de entrada */
-    padding: 8px;
-    margin-bottom: 10px; /* Espacio entre cada campo */
-}
-
-/* Estilo para el botón */
-input[type="submit"] {
-    /* ... (estilos del botón) */
-}
